@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        'abc-diatype': ['ABC Diatype', 'system-ui', 'sans-serif'],
-        'jakarta': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-        'mono': ['ABC Diatype Semi-Mono', 'monospace'],
+        'abc-diatype': ['ABC Diatype', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        'jakarta': ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        'mono': ['ABC Diatype Semi-Mono', 'ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace'],
       },
       colors: {
         'cognihash': {
