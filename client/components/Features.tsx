@@ -10,9 +10,9 @@ export function Features() {
             Powered by Intelligence
           </h2>
           <p className="text-white text-lg lg:text-xl max-w-3xl mx-auto">
-            CogniHash lets you cut through blockchain complexity with one simple prompt. 
-            No more syncing nodes, parsing logs, or chasing dashboards. We orchestrate the 
-            backend chaos—so you just get the insights.
+            CogniHash lets you cut through blockchain complexity with one simple
+            prompt. No more syncing nodes, parsing logs, or chasing dashboards.
+            We orchestrate the backend chaos—so you just get the insights.
           </p>
         </div>
 
@@ -34,7 +34,8 @@ export function Features() {
                   You Ask
                 </h3>
                 <p className="text-white text-lg">
-                  Get real answers instantly. Just type your question—no SQL, no dashboards, no devs needed.
+                  Get real answers instantly. Just type your question—no SQL, no
+                  dashboards, no devs needed.
                 </p>
               </div>
             </div>
@@ -47,7 +48,8 @@ export function Features() {
                   We Orchestrate
                 </h3>
                 <p className="text-white text-lg">
-                  Our AI-native engine automates data indexing, cross-chain search, and agentic reasoning in seconds.
+                  Our AI-native engine automates data indexing, cross-chain
+                  search, and agentic reasoning in seconds.
                 </p>
               </div>
             </div>
@@ -60,7 +62,8 @@ export function Features() {
                   You Get Answers
                 </h3>
                 <p className="text-white text-lg">
-                  Actionable insights delivered quickly for compliance, trading, tracing, or building DeFi.
+                  Actionable insights delivered quickly for compliance, trading,
+                  tracing, or building DeFi.
                 </p>
               </div>
             </div>

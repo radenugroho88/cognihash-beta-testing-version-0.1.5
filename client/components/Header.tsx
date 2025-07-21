@@ -6,9 +6,9 @@ export function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <img 
-            src="https://api.builder.io/api/v1/image/assets/TEMP/6aa47291b1deceac179cead818ec277edb612266?width=112" 
-            alt="CogniHash Logo" 
+          <img
+            src="https://api.builder.io/api/v1/image/assets/TEMP/6aa47291b1deceac179cead818ec277edb612266?width=112"
+            alt="CogniHash Logo"
             className="w-14 h-14"
           />
           <h1 className="text-white font-jakarta font-bold text-2xl lg:text-3xl">
@@ -19,16 +19,28 @@ export function Header() {
         {/* Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
           <div className="flex items-center gap-6 px-8 py-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
-            <a href="#" className="text-white hover:text-cognihash-secondary transition-colors">
+            <a
+              href="#"
+              className="text-white hover:text-cognihash-secondary transition-colors"
+            >
               Products
             </a>
-            <a href="#" className="text-white hover:text-cognihash-secondary transition-colors">
+            <a
+              href="#"
+              className="text-white hover:text-cognihash-secondary transition-colors"
+            >
               Resources
             </a>
-            <a href="#" className="text-white hover:text-cognihash-secondary transition-colors">
+            <a
+              href="#"
+              className="text-white hover:text-cognihash-secondary transition-colors"
+            >
               Pricing
             </a>
-            <a href="#" className="text-white hover:text-cognihash-secondary transition-colors">
+            <a
+              href="#"
+              className="text-white hover:text-cognihash-secondary transition-colors"
+            >
               Blog
             </a>
           </div>

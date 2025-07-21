@@ -2,7 +2,7 @@ export function Partners() {
   const partnerLogos = [
     "https://api.builder.io/api/v1/image/assets/TEMP/712d85962d625151c2dbe8e8a9f6a9c404bfad91?width=1596",
     "https://api.builder.io/api/v1/image/assets/TEMP/a1e3884d9dbbaccdc8b134ff09ec85bce5bb4393?width=799",
-    "https://api.builder.io/api/v1/image/assets/TEMP/3f25cc0bf8917ac8c6f2a0e6f84da6962699ec32?width=745"
+    "https://api.builder.io/api/v1/image/assets/TEMP/3f25cc0bf8917ac8c6f2a0e6f84da6962699ec32?width=745",
   ];
 
   const partnerNames = ["Superteam Indonesia", "Seeker", "Pyth"];

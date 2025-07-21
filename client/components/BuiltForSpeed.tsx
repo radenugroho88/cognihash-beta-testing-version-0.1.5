@@ -8,7 +8,8 @@ export function BuiltForSpeed() {
             Purpose-Built to Clarity & Advantage
           </h2>
           <p className="text-white text-lg lg:text-xl max-w-3xl mx-auto">
-            From query to clarity—instantly. Deeper insights. No-code answers. Zero data grind.
+            From query to clarity—instantly. Deeper insights. No-code answers.
+            Zero data grind.
           </p>
         </div>
 
@@ -30,7 +31,8 @@ export function BuiltForSpeed() {
                   Deeper Insights
                 </h3>
                 <p className="text-white text-lg">
-                  Provide insights and solutions with analysis, improving decision-making through data interpretation.
+                  Provide insights and solutions with analysis, improving
+                  decision-making through data interpretation.
                 </p>
               </div>
             </div>
@@ -43,7 +45,8 @@ export function BuiltForSpeed() {
                   No-Code Interface
                 </h3>
                 <p className="text-white text-lg">
-                  Intuitive design, efficient for all users, enabling seamless integration and adaptability without technical expertise.
+                  Intuitive design, efficient for all users, enabling seamless
+                  integration and adaptability without technical expertise.
                 </p>
               </div>
             </div>
@@ -56,7 +59,8 @@ export function BuiltForSpeed() {
                   You Get Answers
                 </h3>
                 <p className="text-white text-lg">
-                  Minimize with no-code, user-friendly interface, optimizing resource use and boosting efficiency.
+                  Minimize with no-code, user-friendly interface, optimizing
+                  resource use and boosting efficiency.
                 </p>
               </div>
             </div>

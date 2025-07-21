@@ -10,7 +10,9 @@ export function DataClarity() {
               <h2 className="text-4xl lg:text-6xl font-light leading-tight">
                 <span className="text-white">The Data is Clear</span>
                 <br />
-                <span className="text-cognihash-tertiary">Understanding it Isn't</span>
+                <span className="text-cognihash-tertiary">
+                  Understanding it Isn't
+                </span>
               </h2>
 
               {/* Problem Points */}
@@ -46,9 +48,9 @@ export function DataClarity() {
 
             {/* Right Image */}
             <div className="flex justify-center">
-              <img 
-                src="https://api.builder.io/api/v1/image/assets/TEMP/638c2a9ee56a1877ed6120a92cdbf288023275bd?width=1126" 
-                alt="Fragmented Data Visualization" 
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/638c2a9ee56a1877ed6120a92cdbf288023275bd?width=1126"
+                alt="Fragmented Data Visualization"
                 className="w-full max-w-lg rounded-3xl"
               />
             </div>

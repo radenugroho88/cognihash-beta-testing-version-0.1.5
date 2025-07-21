@@ -8,8 +8,9 @@ export function WhyChoose() {
             Why choose CogniHash?
           </h2>
           <p className="text-white text-lg lg:text-xl max-w-4xl mx-auto">
-            CogniHash is building the first AI-native OS for blockchain thinking. 
-            Where AI agents don't just observe the chain—they understand, trace, and act on it in real time.
+            CogniHash is building the first AI-native OS for blockchain
+            thinking. Where AI agents don't just observe the chain—they
+            understand, trace, and act on it in real time.
           </p>
         </div>
 
@@ -21,7 +22,8 @@ export function WhyChoose() {
                 Analytics ≠ Intelligence
               </h3>
               <p className="text-white text-sm lg:text-base uppercase leading-relaxed">
-                CogniHash is building the first agentic AI operating system for the modular, real-time, onchain world.
+                CogniHash is building the first agentic AI operating system for
+                the modular, real-time, onchain world.
               </p>
             </div>
           </div>
@@ -32,7 +34,9 @@ export function WhyChoose() {
                 Versatile & Adaptable
               </h3>
               <p className="text-white text-sm lg:text-base uppercase leading-relaxed">
-                CogniHash architecture seamlessly integrates with any existing blockchain protocol—from DeFi to other on-chain activities and beyond.
+                CogniHash architecture seamlessly integrates with any existing
+                blockchain protocol—from DeFi to other on-chain activities and
+                beyond.
               </p>
             </div>
           </div>
@@ -43,7 +47,8 @@ export function WhyChoose() {
                 User Friendly
               </h3>
               <p className="text-white text-sm lg:text-base uppercase leading-relaxed">
-                Each agent owns a single responsibility. The system coordinates. Control is composable.
+                Each agent owns a single responsibility. The system coordinates.
+                Control is composable.
               </p>
             </div>
           </div>
