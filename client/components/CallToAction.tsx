@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function CallToAction() {
   const [animatedText, setAnimatedText] = useState("Data");
-  
+
   const texts = ["Data", "Insight", "Decision", "Answer", "Result"];
-  
+
   // Simple text rotation (in a real app you'd want proper animation)
-  React.useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setAnimatedText(prev => {
         const currentIndex = texts.indexOf(prev);
