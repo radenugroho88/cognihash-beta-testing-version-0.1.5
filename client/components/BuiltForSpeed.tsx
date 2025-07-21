@@ -14,10 +14,10 @@ export function BuiltForSpeed() {
 
         {/* Central Visualization */}
         <div className="flex justify-center mb-16">
-          <img 
-            src="https://api.builder.io/api/v1/image/assets/TEMP/0087a03421e5fae8a768f794a8ce5891b47d06a6?width=1274" 
-            alt="Purpose Built Visualization" 
-            className="w-full max-w-2xl"
+          <img
+            src="https://api.builder.io/api/v1/image/assets/TEMP/0087a03421e5fae8a768f794a8ce5891b47d06a6?width=1274"
+            alt="Purpose Built Visualization"
+            className="w-full max-w-2xl animate-float"
           />
         </div>
 
