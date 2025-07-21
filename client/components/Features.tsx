@@ -18,10 +18,10 @@ export function Features() {
 
         {/* Central Grid Visualization */}
         <div className="flex justify-center mb-16">
-          <img 
-            src="https://api.builder.io/api/v1/image/assets/TEMP/1a8bb7077a23297a8d2b748fcbf14e207f80c4b4?width=971" 
-            alt="Grid Circle Visualization" 
-            className="w-full max-w-lg"
+          <img
+            src="https://api.builder.io/api/v1/image/assets/TEMP/1a8bb7077a23297a8d2b748fcbf14e207f80c4b4?width=971"
+            alt="Grid Circle Visualization"
+            className="w-full max-w-lg animate-float"
           />
         </div>
 
