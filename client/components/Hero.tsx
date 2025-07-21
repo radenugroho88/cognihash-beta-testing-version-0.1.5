@@ -38,7 +38,7 @@ export function Hero() {
 
           {/* CTA Button */}
           <div className="pt-8">
-            <Button className="cognihash-button text-white px-8 py-3 text-lg font-medium rounded-sm">
+            <Button className="cognihash-button text-white px-8 py-3 text-lg font-medium rounded-sm hover:scale-105 transition-transform animate-glow">
               Get Started
             </Button>
           </div>
