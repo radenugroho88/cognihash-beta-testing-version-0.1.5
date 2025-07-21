@@ -13,7 +13,20 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'abc-diatype': ['ABC Diatype', 'system-ui', 'sans-serif'],
+        'jakarta': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        'mono': ['ABC Diatype Semi-Mono', 'monospace'],
+      },
       colors: {
+        'cognihash': {
+          'primary': '#00B49F',
+          'secondary': '#14F1B2',
+          'tertiary': '#8DFFF0',
+          'dark': '#0E151A',
+          'card': '#0E1214',
+          'border': '#FFF',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
