@@ -23,20 +23,20 @@ export function Partners() {
             {/* First set of logos */}
             {partnerLogos.map((logo, index) => (
               <div key={index} className="flex-shrink-0">
-                <img 
-                  src={logo} 
-                  alt={partnerNames[index]} 
+                <img
+                  src={logo}
+                  alt={partnerNames[index]}
                   className="h-16 lg:h-24 w-auto opacity-80 hover:opacity-100 transition-opacity"
                 />
               </div>
             ))}
-            
+
             {/* Duplicate set for seamless animation */}
             {partnerLogos.map((logo, index) => (
               <div key={`duplicate-${index}`} className="flex-shrink-0">
-                <img 
-                  src={logo} 
-                  alt={partnerNames[index]} 
+                <img
+                  src={logo}
+                  alt={partnerNames[index]}
                   className="h-16 lg:h-24 w-auto opacity-80 hover:opacity-100 transition-opacity"
                 />
               </div>
@@ -44,21 +44,6 @@ export function Partners() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        
-        .animate-scroll {
-          animation: scroll 20s linear infinite;
-        }
-      `}</style>
     </section>
   );
 }
