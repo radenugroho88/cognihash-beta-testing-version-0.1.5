@@ -28,7 +28,7 @@ export function Features() {
         {/* Feature Cards */}
         <div className="grid md:grid-cols-3 gap-8">
           <div className="relative">
-            <div className="border border-white rounded-2xl bg-cognihash-dark p-8 h-48">
+            <div className="border border-white rounded-2xl bg-cognihash-dark p-8 h-48 hover:bg-cognihash-card hover:border-cognihash-secondary transition-all duration-300 hover:scale-105">
               <div className="text-center space-y-4">
                 <h3 className="text-cognihash-secondary text-2xl lg:text-3xl font-bold">
                   You Ask
@@ -41,7 +41,7 @@ export function Features() {
           </div>
 
           <div className="relative">
-            <div className="border border-white rounded-2xl bg-cognihash-dark p-8 h-48">
+            <div className="border border-white rounded-2xl bg-cognihash-dark p-8 h-48 hover:bg-cognihash-card hover:border-cognihash-secondary transition-all duration-300 hover:scale-105">
               <div className="text-center space-y-4">
                 <h3 className="text-cognihash-secondary text-2xl lg:text-3xl font-bold">
                   We Orchestrate
@@ -54,7 +54,7 @@ export function Features() {
           </div>
 
           <div className="relative">
-            <div className="border border-white rounded-2xl bg-cognihash-dark p-8 h-48">
+            <div className="border border-white rounded-2xl bg-cognihash-dark p-8 h-48 hover:bg-cognihash-card hover:border-cognihash-secondary transition-all duration-300 hover:scale-105">
               <div className="text-center space-y-4">
                 <h3 className="text-cognihash-secondary text-2xl lg:text-3xl font-bold">
                   You Get Answers
