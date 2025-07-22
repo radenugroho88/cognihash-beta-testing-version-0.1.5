@@ -287,6 +287,24 @@ export default function Beta() {
 
 
 
+              {/* Debug Info & Fallback */}
+              {process.env.NODE_ENV === 'development' && (
+                <div className="pt-4 border-t border-white/10 space-y-3">
+                  <div className="text-center">
+                    <p className="text-white/60 text-sm mb-2">Debug Info:</p>
+                    <p className="text-white/60 text-xs">Available wallets: {wallets.length}</p>
+                    <div className="text-white/60 text-xs">
+                      {wallets.map(w => w.adapter.name).join(', ')}
+                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <p className="text-white/60 text-sm mb-2">Alternative Connection:</p>
+                    <WalletMultiButton className="!bg-cognihash-primary hover:!bg-cognihash-secondary !text-white" />
+                  </div>
+                </div>
+              )}
+
               {/* Back to Home */}
               <div className="text-center pt-4">
                 <Button
