@@ -38,8 +38,13 @@ export function WalletContextProvider({ children }: WalletContextProviderProps) 
     );
 
     const onError = (error: any) => {
+        // Suppress common wallet extension initialization errors
+        if (error?.message?.includes('register') ||
+            error?.toString?.()?.includes('register') ||
+            error?.name?.includes('WalletNotConnectedError')) {
+            return; // Silently ignore these errors
+        }
         console.log('Wallet error:', error);
-        // Silently handle wallet errors to prevent console spam
     };
 
     return (
