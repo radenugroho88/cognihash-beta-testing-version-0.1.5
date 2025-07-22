@@ -58,33 +58,50 @@ export default function Beta() {
   const handleWalletConnect = async (walletName: string) => {
     setIsConnecting(true);
     setSelectedWallet(walletName);
-    
+
     try {
-      // Special handling for Phantom
-      if (walletName.toLowerCase() === 'phantom') {
-        if (window.phantom?.solana) {
-          const phantom = window.phantom.solana;
-          await phantom.connect();
-          return;
-        } else {
-          // Phantom not installed, redirect to install
-          window.open('https://phantom.app/', '_blank');
-          return;
-        }
-      }
-      
-      // Use wallet adapter for other wallets
-      const wallet = wallets.find(w => 
-        w.adapter.name.toLowerCase().includes(walletName.toLowerCase())
-      );
-      
+      // Find the wallet adapter
+      const wallet = wallets.find(w => {
+        const adapterName = w.adapter.name.toLowerCase();
+        const targetName = walletName.toLowerCase();
+
+        // Handle different naming patterns
+        if (targetName === 'phantom' && adapterName.includes('phantom')) return true;
+        if (targetName === 'solflare' && adapterName.includes('solflare')) return true;
+        if (targetName === 'backpack' && adapterName.includes('backpack')) return true;
+
+        return adapterName.includes(targetName);
+      });
+
       if (wallet) {
-        await connect(wallet.adapter);
+        console.log(`Connecting to ${walletName} wallet:`, wallet.adapter.name);
+        await wallet.adapter.connect();
       } else {
-        console.log(`${walletName} wallet not found`);
+        console.log(`${walletName} wallet adapter not found. Available wallets:`,
+          wallets.map(w => w.adapter.name));
+
+        // If wallet not found, suggest installation
+        if (walletName.toLowerCase() === 'phantom') {
+          window.open('https://phantom.app/', '_blank');
+        } else if (walletName.toLowerCase() === 'solflare') {
+          window.open('https://solflare.com/', '_blank');
+        } else if (walletName.toLowerCase() === 'backpack') {
+          window.open('https://www.backpack.app/', '_blank');
+        }
       }
     } catch (error) {
       console.error(`Error connecting to ${walletName}:`, error);
+
+      // Handle specific error cases
+      if (error.message?.includes('User rejected')) {
+        console.log('User rejected the connection request');
+      } else if (error.message?.includes('not installed')) {
+        console.log(`${walletName} wallet is not installed`);
+        // Open installation page
+        if (walletName.toLowerCase() === 'phantom') {
+          window.open('https://phantom.app/', '_blank');
+        }
+      }
     } finally {
       setIsConnecting(false);
       setSelectedWallet(null);
