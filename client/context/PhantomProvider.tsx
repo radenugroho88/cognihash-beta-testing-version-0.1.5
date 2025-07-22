@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface PhantomWallet {
   isPhantom: boolean;
@@ -28,7 +28,7 @@ const PhantomContext = createContext<PhantomContextValue | null>(null);
 export const usePhantom = () => {
   const context = useContext(PhantomContext);
   if (!context) {
-    throw new Error('usePhantom must be used within a PhantomProvider');
+    throw new Error("usePhantom must be used within a PhantomProvider");
   }
   return context;
 };
@@ -62,7 +62,7 @@ export function PhantomProvider({ children }: PhantomProviderProps) {
     const phantom = getPhantom();
     if (phantom) {
       setPhantom(phantom);
-      
+
       // Check if already connected
       if (phantom.isConnected && phantom.publicKey) {
         setConnected(true);
@@ -70,24 +70,24 @@ export function PhantomProvider({ children }: PhantomProviderProps) {
       }
 
       // Listen for connection events
-      phantom.on('connect', (publicKey: any) => {
+      phantom.on("connect", (publicKey: any) => {
         setConnected(true);
         setPublicKey(publicKey.toString());
       });
 
-      phantom.on('disconnect', () => {
+      phantom.on("disconnect", () => {
         setConnected(false);
         setPublicKey(null);
       });
     } else {
       // Phantom is not installed
-      console.log('Phantom wallet is not installed');
+      console.log("Phantom wallet is not installed");
     }
   }, []);
 
   const connect = async () => {
     if (!phantom) {
-      window.open('https://phantom.app/', '_blank');
+      window.open("https://phantom.app/", "_blank");
       return;
     }
 
@@ -97,7 +97,7 @@ export function PhantomProvider({ children }: PhantomProviderProps) {
       setConnected(true);
       setPublicKey(resp.publicKey.toString());
     } catch (error) {
-      console.error('Error connecting to Phantom:', error);
+      console.error("Error connecting to Phantom:", error);
     } finally {
       setConnecting(false);
     }
@@ -110,14 +110,14 @@ export function PhantomProvider({ children }: PhantomProviderProps) {
         setConnected(false);
         setPublicKey(null);
       } catch (error) {
-        console.error('Error disconnecting from Phantom:', error);
+        console.error("Error disconnecting from Phantom:", error);
       }
     }
   };
 
   const signMessage = async (message: string): Promise<Uint8Array | null> => {
     if (!phantom || !connected) {
-      throw new Error('Phantom wallet not connected');
+      throw new Error("Phantom wallet not connected");
     }
 
     try {
@@ -125,7 +125,7 @@ export function PhantomProvider({ children }: PhantomProviderProps) {
       const signedMessage = await phantom.signMessage(encodedMessage);
       return signedMessage.signature;
     } catch (error) {
-      console.error('Error signing message:', error);
+      console.error("Error signing message:", error);
       return null;
     }
   };
@@ -141,8 +141,6 @@ export function PhantomProvider({ children }: PhantomProviderProps) {
   };
 
   return (
-    <PhantomContext.Provider value={value}>
-      {children}
-    </PhantomContext.Provider>
+    <PhantomContext.Provider value={value}>{children}</PhantomContext.Provider>
   );
 }

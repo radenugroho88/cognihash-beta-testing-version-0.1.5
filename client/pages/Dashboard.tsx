@@ -22,7 +22,12 @@ export default function Dashboard() {
     const verified = localStorage.getItem("cognihash_verified");
     const storedWallet = localStorage.getItem("cognihash_wallet");
 
-    if (verified === "true" && connected && publicKey && storedWallet === publicKey.toString()) {
+    if (
+      verified === "true" &&
+      connected &&
+      publicKey &&
+      storedWallet === publicKey.toString()
+    ) {
       setHasAccess(true);
     } else {
       // Redirect to beta page if not verified
@@ -55,20 +60,21 @@ export default function Dashboard() {
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-gray-900">Access Denied</h2>
             <p className="text-gray-600">
-              Please connect your wallet and complete verification to access the dashboard.
+              Please connect your wallet and complete verification to access the
+              dashboard.
             </p>
           </div>
-          
+
           <div className="space-y-3">
-            <Button 
+            <Button
               onClick={() => navigate("/beta")}
               className="w-full bg-cognihash-primary hover:bg-cognihash-secondary"
             >
               Connect Wallet
             </Button>
-            <Button 
+            <Button
               variant="outline"
-              onClick={() => window.open('https://phantom.app/', '_blank')}
+              onClick={() => window.open("https://phantom.app/", "_blank")}
               className="w-full"
             >
               Install Phantom Wallet
@@ -89,37 +95,38 @@ export default function Dashboard() {
           <MobileMenuTrigger />
 
           <div className="flex px-2 justify-end items-center gap-3">
-          {/* Notifications */}
-          <div className="relative">
-            <Bell className="w-5 h-5 text-gray-600 hover:text-cognihash-primary transition-colors cursor-pointer" />
-            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-cognihash-secondary rounded-full"></div>
-          </div>
+            {/* Notifications */}
+            <div className="relative">
+              <Bell className="w-5 h-5 text-gray-600 hover:text-cognihash-primary transition-colors cursor-pointer" />
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-cognihash-secondary rounded-full"></div>
+            </div>
 
-          {/* Upgrade Button */}
-          <Button
-            variant="secondary"
-            className="hidden sm:flex bg-cognihash-primary/10 text-cognihash-primary hover:bg-cognihash-primary/20 border border-cognihash-primary/20 px-4 py-2 rounded-lg text-sm font-medium transition-all"
-          >
-            Upgrade Now
-          </Button>
+            {/* Upgrade Button */}
+            <Button
+              variant="secondary"
+              className="hidden sm:flex bg-cognihash-primary/10 text-cognihash-primary hover:bg-cognihash-primary/20 border border-cognihash-primary/20 px-4 py-2 rounded-lg text-sm font-medium transition-all"
+            >
+              Upgrade Now
+            </Button>
 
-          {/* User Info */}
-          <div className="flex items-center gap-2 bg-gray-100/70 backdrop-blur-sm rounded-xl px-3 py-1.5 border border-gray-200/50">
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/30159e00472bc78f2b4a10f3c8ce102c3c02f451?width=64"
-              alt="User Avatar"
-              className="w-6 h-6 rounded-full"
-            />
-            <span className="text-gray-700 text-sm font-mono max-w-20 truncate">
-              {publicKey?.toString().slice(0, 6)}...{publicKey?.toString().slice(-4)}
-            </span>
-            <ChevronDown className="w-3 h-3 text-gray-500" />
-          </div>
+            {/* User Info */}
+            <div className="flex items-center gap-2 bg-gray-100/70 backdrop-blur-sm rounded-xl px-3 py-1.5 border border-gray-200/50">
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/30159e00472bc78f2b4a10f3c8ce102c3c02f451?width=64"
+                alt="User Avatar"
+                className="w-6 h-6 rounded-full"
+              />
+              <span className="text-gray-700 text-sm font-mono max-w-20 truncate">
+                {publicKey?.toString().slice(0, 6)}...
+                {publicKey?.toString().slice(-4)}
+              </span>
+              <ChevronDown className="w-3 h-3 text-gray-500" />
+            </div>
 
-          {/* Theme Toggle */}
-          <Sun className="w-5 h-5 text-gray-600 hover:text-cognihash-primary transition-colors cursor-pointer" />
+            {/* Theme Toggle */}
+            <Sun className="w-5 h-5 text-gray-600 hover:text-cognihash-primary transition-colors cursor-pointer" />
 
-          {/* Profile Image */}
+            {/* Profile Image */}
             <div className="w-10 h-10 rounded-full border border-gray-300/50 bg-gray-100/70 backdrop-blur-sm flex items-center justify-center hover:border-cognihash-primary/30 transition-colors cursor-pointer">
               <span className="text-xs">👤</span>
             </div>
@@ -172,16 +179,25 @@ export default function Dashboard() {
                   {/* Agent Selector - Blurred */}
                   <div className="flex items-center gap-4">
                     <Card className="bg-white/40 backdrop-blur-md border border-gray-200/30 shadow-sm px-4 py-2.5 flex items-center gap-2 cursor-pointer hover:bg-white/60 hover:shadow-md transition-all duration-200">
-                      <span className="text-gray-600 text-sm font-medium">Choose your agent</span>
+                      <span className="text-gray-600 text-sm font-medium">
+                        Choose your agent
+                      </span>
                       <ChevronDown className="w-4 h-4 text-gray-500 transform -rotate-90" />
-                      <Badge variant="outline" className="text-xs bg-cognihash-primary/10 text-cognihash-primary border-cognihash-primary/20">Agent</Badge>
+                      <Badge
+                        variant="outline"
+                        className="text-xs bg-cognihash-primary/10 text-cognihash-primary border-cognihash-primary/20"
+                      >
+                        Agent
+                      </Badge>
                     </Card>
                   </div>
 
                   {/* Upload Button */}
                   <Card className="bg-white/70 backdrop-blur-sm border border-gray-200/50 shadow-sm px-4 py-2.5 flex items-center gap-2 cursor-pointer hover:bg-white/90 hover:shadow-md transition-all duration-200">
                     <Plus className="w-4 h-4 text-gray-600" />
-                    <span className="text-gray-600 text-sm font-medium">Upload PDF or Image</span>
+                    <span className="text-gray-600 text-sm font-medium">
+                      Upload PDF or Image
+                    </span>
                   </Card>
                 </div>
               </div>

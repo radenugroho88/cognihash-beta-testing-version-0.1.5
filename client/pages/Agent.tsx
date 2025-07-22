@@ -17,7 +17,12 @@ export default function Agent() {
     const verified = localStorage.getItem("cognihash_verified");
     const storedWallet = localStorage.getItem("cognihash_wallet");
 
-    if (verified === "true" && connected && publicKey && storedWallet === publicKey.toString()) {
+    if (
+      verified === "true" &&
+      connected &&
+      publicKey &&
+      storedWallet === publicKey.toString()
+    ) {
       setHasAccess(true);
     } else {
       setHasAccess(false);
@@ -43,12 +48,13 @@ export default function Agent() {
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-gray-900">Access Denied</h2>
             <p className="text-gray-600">
-              Please connect your wallet and complete verification to access Agent Onchain.
+              Please connect your wallet and complete verification to access
+              Agent Onchain.
             </p>
           </div>
-          
+
           <div className="space-y-3">
-            <Button 
+            <Button
               onClick={() => navigate("/beta")}
               className="w-full bg-cognihash-primary hover:bg-cognihash-secondary"
             >
@@ -70,32 +76,33 @@ export default function Agent() {
           <MobileMenuTrigger />
 
           <div className="flex px-2 justify-end items-center gap-4">
-          <div className="relative">
-            <Bell className="w-6 h-6 text-black" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
-          </div>
-          
-          <Button 
-            variant="secondary" 
-            className="bg-gray-100 text-black hover:bg-gray-200 px-4 py-2 rounded-2xl"
-          >
-            Upgrade Now
-          </Button>
-          
-          <div className="flex items-center gap-2 bg-gray-100 rounded-xl px-2 py-1">
-            <img 
-              src="https://api.builder.io/api/v1/image/assets/TEMP/30159e00472bc78f2b4a10f3c8ce102c3c02f451?width=64"
-              alt="User Avatar"
-              className="w-8 h-8 rounded-full"
-            />
-            <span className="text-black text-sm font-mono max-w-20 truncate">
-              {publicKey?.toString().slice(0, 8)}...{publicKey?.toString().slice(-4)}
-            </span>
-            <ChevronDown className="w-4 h-4 text-black" />
-          </div>
-          
-          <Sun className="w-6 h-6 text-black" />
-          
+            <div className="relative">
+              <Bell className="w-6 h-6 text-black" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+            </div>
+
+            <Button
+              variant="secondary"
+              className="bg-gray-100 text-black hover:bg-gray-200 px-4 py-2 rounded-2xl"
+            >
+              Upgrade Now
+            </Button>
+
+            <div className="flex items-center gap-2 bg-gray-100 rounded-xl px-2 py-1">
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/30159e00472bc78f2b4a10f3c8ce102c3c02f451?width=64"
+                alt="User Avatar"
+                className="w-8 h-8 rounded-full"
+              />
+              <span className="text-black text-sm font-mono max-w-20 truncate">
+                {publicKey?.toString().slice(0, 8)}...
+                {publicKey?.toString().slice(-4)}
+              </span>
+              <ChevronDown className="w-4 h-4 text-black" />
+            </div>
+
+            <Sun className="w-6 h-6 text-black" />
+
             <div className="w-12 h-12 rounded-full border border-gray-200 bg-gray-100 flex items-center justify-center">
               <span className="text-xs">👤</span>
             </div>
@@ -105,8 +112,12 @@ export default function Agent() {
         <main className="flex-1 p-4 md:p-8 overflow-auto">
           <div className="max-w-6xl mx-auto space-y-8">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold text-gray-900">Agent Onchain</h1>
-              <p className="text-gray-600">AI-powered blockchain agents and automation tools</p>
+              <h1 className="text-3xl font-bold text-gray-900">
+                Agent Onchain
+              </h1>
+              <p className="text-gray-600">
+                AI-powered blockchain agents and automation tools
+              </p>
             </div>
 
             <Card className="p-8 text-center">
@@ -114,7 +125,7 @@ export default function Agent() {
                 <div className="text-6xl">🤖</div>
                 <h3 className="text-xl font-semibold">Coming Soon</h3>
                 <p className="text-gray-600">
-                  Agent Onchain functionality is currently under development. 
+                  Agent Onchain functionality is currently under development.
                   Stay tuned for AI-powered blockchain automation tools.
                 </p>
               </div>

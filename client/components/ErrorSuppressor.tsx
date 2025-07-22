@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -21,19 +21,21 @@ class ErrorSuppressor extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Check if this is a wallet extension error
-    const errorMessage = error.message || '';
-    const errorStack = error.stack || '';
-    
-    if (errorMessage.includes('Cannot destructure property') ||
-        errorMessage.includes('register') ||
-        errorStack.includes('chrome-extension://') ||
-        errorStack.includes('extension://')) {
+    const errorMessage = error.message || "";
+    const errorStack = error.stack || "";
+
+    if (
+      errorMessage.includes("Cannot destructure property") ||
+      errorMessage.includes("register") ||
+      errorStack.includes("chrome-extension://") ||
+      errorStack.includes("extension://")
+    ) {
       // Silently ignore wallet extension errors
       return;
     }
-    
+
     // Log other errors normally
-    console.error('Application error:', error, errorInfo);
+    console.error("Application error:", error, errorInfo);
   }
 
   render() {

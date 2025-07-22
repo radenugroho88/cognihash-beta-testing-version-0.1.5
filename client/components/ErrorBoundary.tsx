@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -8,7 +8,10 @@ interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -20,10 +23,13 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Only log wallet-related errors silently
-    if (error.message.includes('wallet') || error.message.includes('register')) {
-      console.log('Wallet initialization error (non-critical):', error.message);
+    if (
+      error.message.includes("wallet") ||
+      error.message.includes("register")
+    ) {
+      console.log("Wallet initialization error (non-critical):", error.message);
     } else {
-      console.error('Application error:', error, errorInfo);
+      console.error("Application error:", error, errorInfo);
     }
   }
 
@@ -33,7 +39,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
         <div className="bg-cognihash-dark min-h-screen flex items-center justify-center">
           <div className="text-center space-y-4">
             <h2 className="text-white text-xl">Something went wrong</h2>
-            <button 
+            <button
               className="cognihash-button text-white px-6 py-2 rounded-lg"
               onClick={() => this.setState({ hasError: false })}
             >

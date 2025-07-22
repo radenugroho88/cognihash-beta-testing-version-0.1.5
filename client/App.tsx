@@ -7,21 +7,26 @@ const originalConsoleLog = console.log;
 
 // Aggressive console override - must be done immediately
 console.error = (...args) => {
-  const errorStr = String(args[0] || '');
+  const errorStr = String(args[0] || "");
 
   // Check for wallet extension error patterns
-  if (errorStr.includes('Cannot destructure property') ||
-      errorStr.includes('register') ||
-      errorStr.includes('chrome-extension://') ||
-      errorStr.includes('moz-extension://') ||
-      errorStr.includes('extension://') ||
-      errorStr.includes('bfnaelmomeimhlpmgjnjophhpkkoljpa') ||
-      errorStr.includes('nkbihfbeogaeaoehlefnkodbefgpgknn') ||
-      errorStr.includes('solana.js') ||
-      errorStr.includes('btc.js') ||
-      errorStr.includes('sui.js') ||
-      errorStr.includes('inpage.js') ||
-      args.some(arg => String(arg).includes('TypeError') && String(arg).includes('register'))) {
+  if (
+    errorStr.includes("Cannot destructure property") ||
+    errorStr.includes("register") ||
+    errorStr.includes("chrome-extension://") ||
+    errorStr.includes("moz-extension://") ||
+    errorStr.includes("extension://") ||
+    errorStr.includes("bfnaelmomeimhlpmgjnjophhpkkoljpa") ||
+    errorStr.includes("nkbihfbeogaeaoehlefnkodbefgpgknn") ||
+    errorStr.includes("solana.js") ||
+    errorStr.includes("btc.js") ||
+    errorStr.includes("sui.js") ||
+    errorStr.includes("inpage.js") ||
+    args.some(
+      (arg) =>
+        String(arg).includes("TypeError") && String(arg).includes("register"),
+    )
+  ) {
     return; // Completely suppress these errors
   }
 
@@ -29,12 +34,14 @@ console.error = (...args) => {
 };
 
 console.warn = (...args) => {
-  const warnStr = String(args[0] || '');
-  if (warnStr.includes('register') ||
-      warnStr.includes('Cannot destructure property') ||
-      warnStr.includes('MetaMask') ||
-      warnStr.includes('extension') ||
-      warnStr.includes('chrome-extension')) {
+  const warnStr = String(args[0] || "");
+  if (
+    warnStr.includes("register") ||
+    warnStr.includes("Cannot destructure property") ||
+    warnStr.includes("MetaMask") ||
+    warnStr.includes("extension") ||
+    warnStr.includes("chrome-extension")
+  ) {
     return;
   }
   originalConsoleWarn.apply(console, args);
@@ -43,21 +50,22 @@ console.warn = (...args) => {
 // Override error event handling at the earliest possible stage
 const handleError = (event) => {
   const error = event.error || {};
-  const message = error.message || event.message || '';
-  const filename = event.filename || '';
-  const stack = error.stack || '';
+  const message = error.message || event.message || "";
+  const filename = event.filename || "";
+  const stack = error.stack || "";
 
   // Comprehensive error pattern matching
-  if (message.includes('Cannot destructure property') ||
-      message.includes('register') ||
-      message.includes('undefined') && message.includes('register') ||
-      filename.includes('chrome-extension://') ||
-      filename.includes('extension://') ||
-      stack.includes('chrome-extension://') ||
-      stack.includes('extension://') ||
-      stack.includes('bfnaelmomeimhlpmgjnjophhpkkoljpa') ||
-      stack.includes('nkbihfbeogaeaoehlefnkodbefgpgknn')) {
-
+  if (
+    message.includes("Cannot destructure property") ||
+    message.includes("register") ||
+    (message.includes("undefined") && message.includes("register")) ||
+    filename.includes("chrome-extension://") ||
+    filename.includes("extension://") ||
+    stack.includes("chrome-extension://") ||
+    stack.includes("extension://") ||
+    stack.includes("bfnaelmomeimhlpmgjnjophhpkkoljpa") ||
+    stack.includes("nkbihfbeogaeaoehlefnkodbefgpgknn")
+  ) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -66,18 +74,20 @@ const handleError = (event) => {
 };
 
 // Add multiple error listeners for maximum coverage
-window.addEventListener('error', handleError, true); // Capture phase
-window.addEventListener('error', handleError, false); // Bubble phase
+window.addEventListener("error", handleError, true); // Capture phase
+window.addEventListener("error", handleError, false); // Bubble phase
 
 // Handle unhandled promise rejections
-window.addEventListener('unhandledrejection', (event) => {
+window.addEventListener("unhandledrejection", (event) => {
   const reason = event.reason;
   const message = reason?.message || reason?.toString?.() || String(reason);
 
-  if (message.includes('register') ||
-      message.includes('Cannot destructure property') ||
-      message.includes('extension://') ||
-      message.includes('chrome-extension://')) {
+  if (
+    message.includes("register") ||
+    message.includes("Cannot destructure property") ||
+    message.includes("extension://") ||
+    message.includes("chrome-extension://")
+  ) {
     event.preventDefault();
     return false;
   }
@@ -85,13 +95,18 @@ window.addEventListener('unhandledrejection', (event) => {
 
 // Monkey patch the Error constructor to catch extension errors at source
 const OriginalError = window.Error;
-window.Error = function(message, ...args) {
-  if (typeof message === 'string' &&
-      (message.includes('Cannot destructure property') ||
-       message.includes('register'))) {
+window.Error = function (message, ...args) {
+  if (
+    typeof message === "string" &&
+    (message.includes("Cannot destructure property") ||
+      message.includes("register"))
+  ) {
     // Return a silent error that won't be logged
-    const silentError = new OriginalError('Extension initialization (suppressed)', ...args);
-    silentError.stack = '';
+    const silentError = new OriginalError(
+      "Extension initialization (suppressed)",
+      ...args,
+    );
+    silentError.stack = "";
     return silentError;
   }
   return new OriginalError(message, ...args);
