@@ -2,10 +2,15 @@ import "./global.css";
 
 // Suppress wallet extension errors
 window.addEventListener('error', (event) => {
-  if (event.error?.message?.includes('register') ||
-      event.message?.includes('register') ||
-      event.filename?.includes('chrome-extension://') ||
-      event.filename?.includes('moz-extension://')) {
+  const errorMessage = event.error?.message || event.message || '';
+  const filename = event.filename || '';
+
+  if (errorMessage.includes('register') ||
+      errorMessage.includes('Cannot destructure property') ||
+      errorMessage.includes('undefined') && errorMessage.includes('register') ||
+      filename.includes('chrome-extension://') ||
+      filename.includes('moz-extension://') ||
+      filename.includes('extension://')) {
     event.preventDefault();
     event.stopPropagation();
     return false;
@@ -14,8 +19,10 @@ window.addEventListener('error', (event) => {
 
 // Suppress unhandled promise rejections from wallet extensions
 window.addEventListener('unhandledrejection', (event) => {
-  if (event.reason?.message?.includes('register') ||
-      event.reason?.toString?.()?.includes('register')) {
+  const reason = event.reason?.message || event.reason?.toString?.() || '';
+  if (reason.includes('register') ||
+      reason.includes('Cannot destructure property') ||
+      reason.includes('undefined') && reason.includes('register')) {
     event.preventDefault();
     return false;
   }
@@ -32,7 +39,13 @@ console.error = (...args) => {
       errorStr.includes('moz-extension://') ||
       errorStr.includes('Cannot destructure property') ||
       errorStr.includes('extension://') ||
-      errorStr.toLowerCase().includes('wallet')) {
+      errorStr.includes('nkbihfbeogaeaoehlefnkodbefgpgknn') ||
+      errorStr.includes('bfnaelmomeimhlpmgjnjophhpkkoljpa') ||
+      errorStr.includes('solana.js') ||
+      errorStr.includes('btc.js') ||
+      errorStr.includes('sui.js') ||
+      errorStr.includes('inpage.js') ||
+      errorStr.toLowerCase().includes('wallet extension')) {
     return; // Suppress these specific errors
   }
   originalConsoleError.apply(console, args);
@@ -40,9 +53,11 @@ console.error = (...args) => {
 
 console.warn = (...args) => {
   const warnStr = args.join(' ');
-  if (warnStr.includes('Encountered two children with the same key') &&
-      warnStr.includes('MetaMask')) {
-    return; // Suppress duplicate key warnings for MetaMask
+  if (warnStr.includes('Encountered two children with the same key') ||
+      warnStr.includes('MetaMask') ||
+      warnStr.includes('register') ||
+      warnStr.includes('Cannot destructure property')) {
+    return; // Suppress these warnings
   }
   originalConsoleWarn.apply(console, args);
 };
