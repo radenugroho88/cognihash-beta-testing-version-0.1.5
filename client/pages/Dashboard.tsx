@@ -130,13 +130,13 @@ export default function Dashboard() {
         <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 overflow-auto">
           <div className="w-full max-w-4xl space-y-8">
             {/* Logo and Title */}
-            <div className="flex items-center justify-center gap-4">
-              <img 
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
+              <img
                 src="https://api.builder.io/api/v1/image/assets/TEMP/7ce561e0f5e56e5e3758bd4d001defd233843009?width=128"
                 alt="CogniHash Logo"
-                className="w-16 h-16"
+                className="w-16 h-16 drop-shadow-sm"
               />
-              <h1 className="text-2xl font-bold text-black">
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-800 leading-tight">
                 CogniHash Data Intelligence Platform
               </h1>
             </div>
