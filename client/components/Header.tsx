@@ -48,9 +48,11 @@ export function Header() {
         </nav>
 
         {/* CTA Button */}
-        <Button className="cognihash-button text-white border-0 px-6 py-2 rounded-sm font-abc-diatype hover:scale-105 transition-transform">
-          Join Beta
-        </Button>
+        <Link to="/beta">
+          <Button className="cognihash-button text-white border-0 px-6 py-2 rounded-sm font-abc-diatype hover:scale-105 transition-transform">
+            Join Beta
+          </Button>
+        </Link>
       </div>
     </header>
   );
