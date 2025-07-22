@@ -47,13 +47,18 @@ export default function Beta() {
   useEffect(() => {
     // Check if user already has verified access
     const verified = localStorage.getItem("cognihash_verified");
-    if (verified === "true" && connected) {
+    const storedWallet = localStorage.getItem("cognihash_wallet");
+
+    if (verified === "true" && connected && publicKey && storedWallet === publicKey.toString()) {
       setHasAccess(true);
       setStep('success');
-    } else if (connected) {
+    } else if (connected && publicKey) {
       setStep('verify');
+    } else {
+      setStep('connect');
+      setHasAccess(false);
     }
-  }, [connected]);
+  }, [connected, publicKey]);
 
   const handleWalletConnect = async (walletName: string) => {
     setIsConnecting(true);
