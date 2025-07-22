@@ -276,32 +276,7 @@ export default function Beta() {
                 </div>
               )}
 
-              {/* Features Preview */}
-              <div className="pt-6 border-t border-white/10">
-                <h4 className="text-white font-semibold mb-4 text-center">What you'll get access to:</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="text-center space-y-2">
-                    <div className="w-8 h-8 mx-auto bg-cognihash-secondary/20 rounded-lg flex items-center justify-center">
-                      <span className="text-cognihash-secondary text-sm font-bold">AI</span>
-                    </div>
-                    <div className="text-white/80 text-sm">AI-Powered Analysis</div>
-                  </div>
-                  
-                  <div className="text-center space-y-2">
-                    <div className="w-8 h-8 mx-auto bg-cognihash-secondary/20 rounded-lg flex items-center justify-center">
-                      <span className="text-cognihash-secondary text-xs">⚡</span>
-                    </div>
-                    <div className="text-white/80 text-sm">Real-Time Data</div>
-                  </div>
-                  
-                  <div className="text-center space-y-2">
-                    <div className="w-8 h-8 mx-auto bg-cognihash-secondary/20 rounded-lg flex items-center justify-center">
-                      <span className="text-cognihash-secondary text-xs">🚀</span>
-                    </div>
-                    <div className="text-white/80 text-sm">No-Code Interface</div>
-                  </div>
-                </div>
-              </div>
+
 
               {/* Back to Home */}
               <div className="text-center pt-4">
