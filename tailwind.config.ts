@@ -14,6 +14,16 @@ export default {
     },
     extend: {
       fontFamily: {
+        inter: [
+          "Inter",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
         "abc-diatype": [
           "ABC Diatype",
           "-apple-system",
