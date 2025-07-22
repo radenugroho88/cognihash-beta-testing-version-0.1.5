@@ -26,11 +26,18 @@ export function WalletContextProvider({ children }: WalletContextProviderProps) 
     const wallets = useMemo(
         () => {
             try {
-                return [
+                const adapters = [
                     new PhantomWalletAdapter(),
                     new SolflareWalletAdapter(),
                     new BackpackWalletAdapter(),
                 ];
+
+                // Remove duplicates based on adapter name
+                const uniqueAdapters = adapters.filter((adapter, index, arr) =>
+                    arr.findIndex(a => a.name === adapter.name) === index
+                );
+
+                return uniqueAdapters;
             } catch (error) {
                 console.log('Wallet adapter initialization:', error);
                 return [];
