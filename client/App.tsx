@@ -58,6 +58,8 @@ import Index from "./pages/Index";
 import Beta from "./pages/Beta";
 import Dashboard from "./pages/Dashboard";
 import Portfolio from "./pages/Portfolio";
+import Agent from "./pages/Agent";
+import Transactions from "./pages/Transactions";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
