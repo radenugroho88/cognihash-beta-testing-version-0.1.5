@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useNavigate } from "react-router-dom";
-import { Bell, Sun, ChevronDown, Plus, MessageSquare, Bot, BarChart3, PieChart, HelpCircle, Settings, Upload } from "lucide-react";
+import { Bell, Sun, ChevronDown, Plus, Upload } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
+import Sidebar from "../components/Sidebar";
 
 export default function Dashboard() {
   const { connected, publicKey } = useWallet();
@@ -118,31 +119,8 @@ export default function Dashboard() {
       </header>
 
       <div className="flex">
-        {/* Collapsed Sidebar */}
-        <aside className="w-[88px] h-screen bg-gray-100 flex flex-col items-center py-10 gap-8">
-          {/* Logo */}
-          <div className="w-[52.5px] h-[52.5px] rounded bg-white flex items-center justify-center">
-            <img 
-              src="https://api.builder.io/api/v1/image/assets/TEMP/d3accaac5015101aa5c50b3f516fc2fa922defa3?width=105"
-              alt="CogniHash Logo"
-              className="w-[53px] h-[53px]"
-            />
-          </div>
-          
-          {/* Navigation Icons */}
-          <div className="flex flex-col gap-8">
-            <MessageSquare className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
-            <Bot className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
-            <BarChart3 className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
-            <PieChart className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
-          </div>
-          
-          {/* Bottom Icons */}
-          <div className="mt-auto flex flex-col gap-4">
-            <HelpCircle className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
-            <Settings className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
-          </div>
-        </aside>
+        {/* Sidebar */}
+        <Sidebar />
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col items-center justify-center px-8">
