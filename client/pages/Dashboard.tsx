@@ -85,42 +85,42 @@ export default function Dashboard() {
 
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header Bar */}
-        <header className="w-full h-16 px-4 py-2 flex justify-between items-center backdrop-blur-[17.5px] border-b border-gray-100 bg-white/80">
+        <header className="w-full h-16 px-4 py-2 flex justify-between items-center backdrop-blur-[17.5px] border-b border-gray-200/60 bg-white/90">
           <MobileMenuTrigger />
 
-          <div className="flex px-2 justify-end items-center gap-4">
+          <div className="flex px-2 justify-end items-center gap-3">
           {/* Notifications */}
           <div className="relative">
-            <Bell className="w-6 h-6 text-black" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+            <Bell className="w-5 h-5 text-gray-600 hover:text-cognihash-primary transition-colors cursor-pointer" />
+            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-cognihash-secondary rounded-full"></div>
           </div>
-          
+
           {/* Upgrade Button */}
-          <Button 
-            variant="secondary" 
-            className="bg-gray-100 text-black hover:bg-gray-200 px-4 py-2 rounded-2xl"
+          <Button
+            variant="secondary"
+            className="hidden sm:flex bg-cognihash-primary/10 text-cognihash-primary hover:bg-cognihash-primary/20 border border-cognihash-primary/20 px-4 py-2 rounded-lg text-sm font-medium transition-all"
           >
             Upgrade Now
           </Button>
-          
+
           {/* User Info */}
-          <div className="flex items-center gap-2 bg-gray-100 rounded-xl px-2 py-1">
-            <img 
+          <div className="flex items-center gap-2 bg-gray-100/70 backdrop-blur-sm rounded-xl px-3 py-1.5 border border-gray-200/50">
+            <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/30159e00472bc78f2b4a10f3c8ce102c3c02f451?width=64"
               alt="User Avatar"
-              className="w-8 h-8 rounded-full"
+              className="w-6 h-6 rounded-full"
             />
-            <span className="text-black text-sm font-mono max-w-20 truncate">
-              {publicKey?.toString().slice(0, 8)}...{publicKey?.toString().slice(-4)}
+            <span className="text-gray-700 text-sm font-mono max-w-20 truncate">
+              {publicKey?.toString().slice(0, 6)}...{publicKey?.toString().slice(-4)}
             </span>
-            <ChevronDown className="w-4 h-4 text-black" />
+            <ChevronDown className="w-3 h-3 text-gray-500" />
           </div>
-          
+
           {/* Theme Toggle */}
-          <Sun className="w-6 h-6 text-black" />
-          
+          <Sun className="w-5 h-5 text-gray-600 hover:text-cognihash-primary transition-colors cursor-pointer" />
+
           {/* Profile Image */}
-            <div className="w-12 h-12 rounded-full border border-gray-200 bg-gray-100 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full border border-gray-300/50 bg-gray-100/70 backdrop-blur-sm flex items-center justify-center hover:border-cognihash-primary/30 transition-colors cursor-pointer">
               <span className="text-xs">👤</span>
             </div>
           </div>
