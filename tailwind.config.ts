@@ -34,6 +34,16 @@ export default {
           "Arial",
           "sans-serif",
         ],
+        lexend: [
+          "Lexend",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
         mono: [
           "ABC Diatype Semi-Mono",
           "ui-monospace",
