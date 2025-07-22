@@ -117,28 +117,30 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <WalletContextProvider>
-      <SidebarProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/beta" element={<Beta />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/agent" element={<Agent />} />
-              <Route path="/transactions" element={<Transactions />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </SidebarProvider>
-    </WalletContextProvider>
-  </QueryClientProvider>
+  <ErrorSuppressor>
+    <QueryClientProvider client={queryClient}>
+      <WalletContextProvider>
+        <SidebarProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/beta" element={<Beta />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/agent" element={<Agent />} />
+                <Route path="/transactions" element={<Transactions />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </SidebarProvider>
+      </WalletContextProvider>
+    </QueryClientProvider>
+  </ErrorSuppressor>
 );
 
 createRoot(document.getElementById("root")!).render(<App />);
