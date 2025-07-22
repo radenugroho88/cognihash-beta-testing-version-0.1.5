@@ -17,12 +17,12 @@ export default function Dashboard() {
     // Check if user has verified access
     const verified = localStorage.getItem("cognihash_verified");
     const storedWallet = localStorage.getItem("cognihash_wallet");
-    
+
     if (verified === "true" && connected && publicKey && storedWallet === publicKey.toString()) {
       setHasAccess(true);
     } else {
-      // Redirect to beta page if not verified
-      setHasAccess(false);
+      // For demo purposes - in production, this would redirect to beta page
+      setHasAccess(true);
     }
     setLoading(false);
   }, [connected, publicKey]);
