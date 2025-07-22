@@ -28,7 +28,8 @@ export function WalletContextProvider({ children }: WalletContextProviderProps) 
             try {
                 return [
                     new PhantomWalletAdapter(),
-                    // Add other wallet adapters here if needed
+                    new SolflareWalletAdapter(),
+                    new BackpackWalletAdapter(),
                 ];
             } catch (error) {
                 console.log('Wallet adapter initialization:', error);
