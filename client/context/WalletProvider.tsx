@@ -50,12 +50,23 @@ export function WalletContextProvider({ children }: WalletContextProviderProps) 
     const onError = (error: any) => {
         // Suppress common wallet extension initialization errors
         const errorStr = error?.message || error?.toString?.() || '';
+        const errorStack = error?.stack || '';
+
         if (errorStr.includes('register') ||
-            errorStr.includes('Cannot destructure') ||
+            errorStr.includes('Cannot destructure property') ||
+            errorStr.includes('undefined') && errorStr.includes('register') ||
             errorStr.includes('chrome-extension') ||
             errorStr.includes('moz-extension') ||
+            errorStr.includes('extension://') ||
+            errorStack.includes('solana.js') ||
+            errorStack.includes('btc.js') ||
+            errorStack.includes('sui.js') ||
+            errorStack.includes('inpage.js') ||
+            errorStack.includes('bfnaelmomeimhlpmgjnjophhpkkoljpa') ||
+            errorStack.includes('nkbihfbeogaeaoehlefnkodbefgpgknn') ||
             error?.name?.includes('WalletNotConnectedError') ||
-            error?.name?.includes('WalletNotReadyError')) {
+            error?.name?.includes('WalletNotReadyError') ||
+            error?.name?.includes('WalletDisconnectedError')) {
             return; // Silently ignore these errors
         }
         console.log('Wallet error:', error);
