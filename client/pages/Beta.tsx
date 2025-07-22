@@ -161,8 +161,8 @@ export default function Beta() {
             <CardHeader className="text-center space-y-4">
               {/* Logo */}
               <div className="flex items-center justify-center gap-3 p-4 border border-white/10 rounded-lg bg-white/5 backdrop-blur-sm">
-                <img 
-                  src="https://api.builder.io/api/v1/image/assets/TEMP/d3ad95dc35cd88644ec4e7e228b7c5efdd8aa022?width=48"
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F1bea0cc41c084038a6a915a367aa70f5%2F5308d7802ddd4353a106d0a44121efa6?format=webp&width=800"
                   alt="CogniHash Logo"
                   className="w-8 h-10"
                 />
