@@ -101,8 +101,8 @@ export default function Dashboard() {
               alt="User Avatar"
               className="w-8 h-8 rounded-full"
             />
-            <span className="text-black text-sm font-mono max-w-16 truncate">
-              {publicKey?.toString().slice(0, 8)}...
+            <span className="text-black text-sm font-mono max-w-20 truncate">
+              {publicKey?.toString().slice(0, 8)}...{publicKey?.toString().slice(-4)}
             </span>
             <ChevronDown className="w-4 h-4 text-black" />
           </div>
