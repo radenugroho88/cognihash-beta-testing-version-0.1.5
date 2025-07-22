@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { WalletContextProvider } from "./context/WalletProvider";
+import { PhantomProvider } from "./context/PhantomProvider";
 import Index from "./pages/Index";
 import Beta from "./pages/Beta";
 import Dashboard from "./pages/Dashboard";
