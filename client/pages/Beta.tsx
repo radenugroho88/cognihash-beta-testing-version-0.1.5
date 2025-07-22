@@ -45,19 +45,35 @@ export default function Beta() {
   const handleWalletConnect = async (walletName: string) => {
     setIsConnecting(true);
     setSelectedWallet(walletName);
-    
+
     try {
-      const wallet = wallets.find(w => 
+      // Special handling for Phantom
+      if (walletName.toLowerCase() === 'phantom') {
+        if (window.phantom?.solana) {
+          const phantom = window.phantom.solana;
+          await phantom.connect();
+          return;
+        } else {
+          // Phantom not installed, redirect to install
+          window.open('https://phantom.app/', '_blank');
+          return;
+        }
+      }
+
+      // Use wallet adapter for other wallets
+      const wallet = wallets.find(w =>
         w.adapter.name.toLowerCase().includes(walletName.toLowerCase())
       );
-      
+
       if (wallet) {
         await connect(wallet.adapter);
-        
+
         // If connected, automatically sign message for verification
         if (publicKey && signMessage) {
           await handleSignMessage();
         }
+      } else {
+        console.log(`${walletName} wallet not found`);
       }
     } catch (error) {
       console.error(`Error connecting to ${walletName}:`, error);
