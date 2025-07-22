@@ -26,11 +26,26 @@ export function WalletContextProvider({ children }: WalletContextProviderProps) 
     const wallets = useMemo(
         () => {
             try {
-                const adapters = [
-                    new PhantomWalletAdapter(),
-                    new SolflareWalletAdapter(),
-                    new BackpackWalletAdapter(),
-                ];
+                const adapters: any[] = [];
+
+                // Safely initialize each adapter
+                try {
+                    adapters.push(new PhantomWalletAdapter());
+                } catch (e) {
+                    // Phantom adapter failed to initialize
+                }
+
+                try {
+                    adapters.push(new SolflareWalletAdapter());
+                } catch (e) {
+                    // Solflare adapter failed to initialize
+                }
+
+                try {
+                    adapters.push(new BackpackWalletAdapter());
+                } catch (e) {
+                    // Backpack adapter failed to initialize
+                }
 
                 // Remove duplicates based on adapter name
                 const uniqueAdapters = adapters.filter((adapter, index, arr) =>
@@ -39,7 +54,11 @@ export function WalletContextProvider({ children }: WalletContextProviderProps) 
 
                 return uniqueAdapters;
             } catch (error) {
-                console.log('Wallet adapter initialization:', error);
+                // Suppress register-related errors during initialization
+                const errorStr = error?.message || '';
+                if (!errorStr.includes('register') && !errorStr.includes('Cannot destructure')) {
+                    console.log('Wallet adapter initialization:', error);
+                }
                 return [];
             }
         },
