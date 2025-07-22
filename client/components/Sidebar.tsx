@@ -57,13 +57,17 @@ export default function Sidebar() {
       <aside className="w-[88px] h-screen bg-gray-100 flex flex-col items-center py-10 justify-between">
         <div className="flex flex-col items-center gap-8">
           {/* Logo */}
-          <div className="w-[52.5px] h-[52.5px] rounded bg-white flex items-center justify-center">
-            <img 
+          <Button
+            variant="ghost"
+            onClick={() => setIsCollapsed(false)}
+            className="w-[52.5px] h-[52.5px] rounded bg-white hover:bg-gray-50 p-0"
+          >
+            <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/d3accaac5015101aa5c50b3f516fc2fa922defa3?width=105"
               alt="CogniHash Logo"
               className="w-[53px] h-[53px]"
             />
-          </div>
+          </Button>
           
           {/* Navigation Icons */}
           <div className="flex flex-col gap-8">
