@@ -3,7 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello world project</title>
+    <title>CogniHash - Data Intelligence Platform</title>
+
+    <!-- Early error suppression for wallet extensions -->
+    <script>
+      (function() {
+        // Override console methods immediately before any other scripts load
+        const originalError = console.error;
+        const originalWarn = console.warn;
+
+        console.error = function(...args) {
+          const msg = String(args[0] || '');
+          if (msg.includes('Cannot destructure property') ||
+              msg.includes('register') ||
+              msg.includes('chrome-extension://') ||
+              msg.includes('extension://') ||
+              msg.includes('bfnaelmomeimhlpmgjnjophhpkkoljpa') ||
+              msg.includes('nkbihfbeogaeaoehlefnkodbefgpgknn')) {
+            return; // Suppress wallet extension errors
+          }
+          originalError.apply(console, args);
+        };
+
+        console.warn = function(...args) {
+          const msg = String(args[0] || '');
+          if (msg.includes('register') ||
+              msg.includes('extension') ||
+              msg.includes('Cannot destructure')) {
+            return;
+          }
+          originalWarn.apply(console, args);
+        };
+
+        // Early error event suppression
+        window.addEventListener('error', function(e) {
+          const msg = e.error?.message || e.message || '';
+          const file = e.filename || '';
+          if (msg.includes('Cannot destructure property') ||
+              msg.includes('register') ||
+              file.includes('chrome-extension://') ||
+              file.includes('extension://')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(e) {
+          const msg = String(e.reason?.message || e.reason || '');
+          if (msg.includes('register') ||
+              msg.includes('Cannot destructure property') ||
+              msg.includes('extension://')) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      })();
+    </script>
   </head>
 
   <body>
