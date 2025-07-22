@@ -197,12 +197,12 @@ export default function Portfolio() {
               {/* Performance Card */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">24h Change</CardTitle>
+                  <CardTitle className="text-sm font-medium text-white">24h Change</CardTitle>
                   <TrendingUp className="w-4 h-4 text-green-600" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-xl md:text-2xl font-bold text-green-600">+2.34%</div>
-                  <p className="text-gray-600 text-sm mt-2">
+                  <p className="text-white text-sm mt-2">
                     +0.0234 SOL
                   </p>
                 </CardContent>
@@ -211,14 +211,14 @@ export default function Portfolio() {
               {/* Network Card */}
               <Card className="md:col-span-2 lg:col-span-1">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Network</CardTitle>
+                  <CardTitle className="text-sm font-medium text-white">Network</CardTitle>
                   <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
                     Mainnet
                   </Badge>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-xl md:text-2xl font-bold text-gray-900">Solana</div>
-                  <p className="text-gray-600 text-sm mt-2">
+                  <div className="text-xl md:text-2xl font-bold text-white">Solana</div>
+                  <p className="text-white text-sm mt-2">
                     Fast & Secure
                   </p>
                 </CardContent>
@@ -235,8 +235,8 @@ export default function Portfolio() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-600">Wallet Address</label>
-                  <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
+                  <label className="text-sm font-medium text-white">Wallet Address</label>
+                  <div className="flex items-center gap-2 p-3 rounded-lg" style={{backgroundColor: '#616468'}}>
                     <span className="font-mono text-xs md:text-sm flex-1 truncate">
                       {publicKey?.toString()}
                     </span>
@@ -266,11 +266,11 @@ export default function Portfolio() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-600">Wallet Type</label>
+                    <label className="text-sm font-medium text-white">Wallet Type</label>
                     <p className="text-sm text-gray-900">Solana Web3 Wallet</p>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-600">Connected Since</label>
+                    <label className="text-sm font-medium text-white">Connected Since</label>
                     <p className="text-sm text-gray-900">
                       {new Date().toLocaleDateString()}
                     </p>
@@ -283,21 +283,29 @@ export default function Portfolio() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg md:text-xl">Token Holdings</CardTitle>
-                <p className="text-sm text-gray-600">Your current token balances</p>
+                <p className="text-sm text-white">Your current token balances</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div className="flex items-center justify-between p-4 rounded-lg" style={{backgroundColor: 'rgba(255, 255, 255, 0.34)'}}>
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                      <div
+                        className="w-8 h-8 rounded-full bg-white"
+                        style={{
+                          backgroundImage: 'url(https://cdn.builder.io/api/v1/image/assets%2F1bea0cc41c084038a6a915a367aa70f5%2F12180fafd2c24e73b170d5132fd58a83)',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundPosition: 'center',
+                          backgroundSize: 'cover'
+                        }}
+                      ></div>
                       <div>
                         <p className="font-medium">Solana</p>
-                        <p className="text-sm text-gray-600">SOL</p>
+                        <p className="text-sm text-white">SOL</p>
                       </div>
                     </div>
                     <div className="text-right">
                       <p className="font-medium">{balance.toFixed(4)} SOL</p>
-                      <p className="text-sm text-gray-600">${(balance * 85.32).toFixed(2)}</p>
+                      <p className="text-sm text-white">${(balance * 85.32).toFixed(2)}</p>
                     </div>
                   </div>
 
