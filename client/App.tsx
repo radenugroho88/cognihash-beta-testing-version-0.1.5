@@ -4,11 +4,34 @@ import "./global.css";
 window.addEventListener('error', (event) => {
   if (event.error?.message?.includes('register') ||
       event.message?.includes('register') ||
-      event.filename?.includes('chrome-extension://')) {
+      event.filename?.includes('chrome-extension://') ||
+      event.filename?.includes('moz-extension://')) {
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+  }
+});
+
+// Suppress unhandled promise rejections from wallet extensions
+window.addEventListener('unhandledrejection', (event) => {
+  if (event.reason?.message?.includes('register') ||
+      event.reason?.toString?.()?.includes('register')) {
     event.preventDefault();
     return false;
   }
 });
+
+// Override console.error temporarily for wallet extension errors
+const originalConsoleError = console.error;
+console.error = (...args) => {
+  const errorStr = args.join(' ');
+  if (errorStr.includes('register') ||
+      errorStr.includes('chrome-extension://') ||
+      errorStr.includes('Cannot destructure property')) {
+    return; // Suppress these specific errors
+  }
+  originalConsoleError.apply(console, args);
+};
 
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
