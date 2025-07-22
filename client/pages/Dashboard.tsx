@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Bell, Sun, ChevronDown, Plus, MessageSquare, Bot, BarChart3, PieChart, HelpCircle, Settings, Upload } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
-import { Input } from "../components/ui/input";
-import { Search, TrendingUp, Activity, DollarSign, Users } from "lucide-react";
+import { Badge } from "../components/ui/badge";
 
 export default function Dashboard() {
   const { connected, publicKey } = useWallet();
   const [hasAccess, setHasAccess] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,201 +22,200 @@ export default function Dashboard() {
       setHasAccess(true);
     } else {
       // Redirect to beta page if not verified
-      navigate("/beta");
+      setHasAccess(false);
     }
-  }, [connected, publicKey, navigate]);
+    setLoading(false);
+  }, [connected, publicKey]);
 
-  const handleQuery = async () => {
+  const handleSend = () => {
     if (!query.trim()) return;
-    
-    setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    // Handle query submission
+    console.log("Sending query:", query);
   };
 
-  if (!hasAccess) {
+  if (loading) {
     return (
-      <div className="bg-cognihash-dark min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="animate-spin h-8 w-8 border-2 border-cognihash-secondary border-t-transparent rounded-full mx-auto"></div>
-          <p className="text-white">Verifying access...</p>
+          <div className="animate-spin h-8 w-8 border-2 border-gray-300 border-t-cognihash-primary rounded-full mx-auto"></div>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
   }
 
+  if (!hasAccess) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <Card className="max-w-md mx-auto p-8 text-center space-y-6">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900">Access Denied</h2>
+            <p className="text-gray-600">
+              Please connect your wallet and complete verification to access the dashboard.
+            </p>
+          </div>
+          
+          <div className="space-y-3">
+            <Button 
+              onClick={() => navigate("/beta")}
+              className="w-full bg-cognihash-primary hover:bg-cognihash-secondary"
+            >
+              Connect Wallet
+            </Button>
+            <Button 
+              variant="outline"
+              onClick={() => window.open('https://phantom.app/', '_blank')}
+              className="w-full"
+            >
+              Install Phantom Wallet
+            </Button>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-cognihash-dark min-h-screen">
-      {/* Header */}
-      <header className="border-b border-white/10 bg-cognihash-card/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img 
-                src="https://api.builder.io/api/v1/image/assets/TEMP/6aa47291b1deceac179cead818ec277edb612266?width=112"
-                alt="CogniHash Logo" 
-                className="w-10 h-10"
-              />
-              <h1 className="text-white font-jakarta font-bold text-xl">
-                CogniHash Dashboard
-              </h1>
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <span className="text-white/70 text-sm">
-                {publicKey?.toString().slice(0, 8)}...{publicKey?.toString().slice(-8)}
-              </span>
-              <WalletMultiButton className="!bg-cognihash-primary/20 !border !border-cognihash-primary hover:!bg-cognihash-primary/30" />
-            </div>
+    <div className="min-h-screen bg-white">
+      {/* Header Bar */}
+      <header className="w-full h-16 px-5 py-2 flex justify-end items-center backdrop-blur-[17.5px] border-b border-gray-100">
+        <div className="flex px-2 justify-end items-center gap-4">
+          {/* Notifications */}
+          <div className="relative">
+            <Bell className="w-6 h-6 text-black" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+          </div>
+          
+          {/* Upgrade Button */}
+          <Button 
+            variant="secondary" 
+            className="bg-gray-100 text-black hover:bg-gray-200 px-4 py-2 rounded-2xl"
+          >
+            Upgrade Now
+          </Button>
+          
+          {/* User Info */}
+          <div className="flex items-center gap-2 bg-gray-100 rounded-xl px-2 py-1">
+            <img 
+              src="https://api.builder.io/api/v1/image/assets/TEMP/30159e00472bc78f2b4a10f3c8ce102c3c02f451?width=64"
+              alt="User Avatar"
+              className="w-8 h-8 rounded-full"
+            />
+            <span className="text-black text-sm font-mono max-w-16 truncate">
+              {publicKey?.toString().slice(0, 8)}...
+            </span>
+            <ChevronDown className="w-4 h-4 text-black" />
+          </div>
+          
+          {/* Theme Toggle */}
+          <Sun className="w-6 h-6 text-black" />
+          
+          {/* Profile Image */}
+          <div className="w-12 h-12 rounded-full border border-gray-200 bg-gray-100 flex items-center justify-center">
+            <span className="text-xs">👤</span>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Welcome Section */}
-        <div className="mb-8">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-2">
-            Welcome to CogniHash Beta! 🚀
-          </h2>
-          <p className="text-white/70 text-lg">
-            Ask any question about blockchain data and get AI-powered insights instantly.
-          </p>
-        </div>
-
-        {/* Query Interface */}
-        <Card className="bg-cognihash-card border-white/20 p-6 mb-8">
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">Ask CogniHash</h3>
-            <div className="flex gap-4">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50" />
-                <Input
-                  placeholder="e.g., What are the top performing DeFi tokens today?"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleQuery()}
-                  className="pl-12 bg-cognihash-dark border-white/20 text-white placeholder:text-white/50 h-12"
-                />
-              </div>
-              <Button 
-                onClick={handleQuery}
-                disabled={isLoading || !query.trim()}
-                className="cognihash-button px-8 h-12"
-              >
-                {isLoading ? "Analyzing..." : "Ask"}
-              </Button>
-            </div>
+      <div className="flex">
+        {/* Collapsed Sidebar */}
+        <aside className="w-[88px] h-screen bg-gray-100 flex flex-col items-center py-10 gap-8">
+          {/* Logo */}
+          <div className="w-[52.5px] h-[52.5px] rounded bg-white flex items-center justify-center">
+            <img 
+              src="https://api.builder.io/api/v1/image/assets/TEMP/d3accaac5015101aa5c50b3f516fc2fa922defa3?width=105"
+              alt="CogniHash Logo"
+              className="w-[53px] h-[53px]"
+            />
           </div>
-        </Card>
-
-        {/* Sample Queries */}
-        <div className="mb-8">
-          <h3 className="text-xl font-bold text-white mb-4">Try these sample queries:</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              "What's the TVL of Solana DeFi protocols?",
-              "Show me recent whale transactions",
-              "Analyze NFT trading volume trends",
-              "What are the gas fees on Ethereum?",
-              "Find suspicious transaction patterns",
-              "Compare DEX trading volumes"
-            ].map((sampleQuery, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                onClick={() => setQuery(sampleQuery)}
-                className="text-left h-auto p-4 border-white/20 text-white hover:bg-cognihash-card/50 hover:border-cognihash-secondary"
-              >
-                "{sampleQuery}"
-              </Button>
-            ))}
+          
+          {/* Navigation Icons */}
+          <div className="flex flex-col gap-8">
+            <MessageSquare className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
+            <Bot className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
+            <BarChart3 className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
+            <PieChart className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
           </div>
-        </div>
+          
+          {/* Bottom Icons */}
+          <div className="mt-auto flex flex-col gap-4">
+            <HelpCircle className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
+            <Settings className="w-8 h-8 text-black cursor-pointer hover:text-cognihash-primary" />
+          </div>
+        </aside>
 
-        {/* Dashboard Stats */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-cognihash-card border-white/20 p-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-cognihash-secondary/20 rounded-lg flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-cognihash-secondary" />
-              </div>
-              <div>
-                <p className="text-white/70 text-sm">Queries Today</p>
-                <p className="text-white text-2xl font-bold">247</p>
-              </div>
+        {/* Main Content */}
+        <main className="flex-1 flex flex-col items-center justify-center px-8">
+          <div className="w-full max-w-4xl space-y-8">
+            {/* Logo and Title */}
+            <div className="flex items-center justify-center gap-4">
+              <img 
+                src="https://api.builder.io/api/v1/image/assets/TEMP/7ce561e0f5e56e5e3758bd4d001defd233843009?width=128"
+                alt="CogniHash Logo"
+                className="w-16 h-16"
+              />
+              <h1 className="text-2xl font-bold text-black">
+                CogniHash Data Intelligence Platform
+              </h1>
             </div>
-          </Card>
 
-          <Card className="bg-cognihash-card border-white/20 p-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-cognihash-secondary/20 rounded-lg flex items-center justify-center">
-                <Activity className="w-5 h-5 text-cognihash-secondary" />
-              </div>
-              <div>
-                <p className="text-white/70 text-sm">Data Sources</p>
-                <p className="text-white text-2xl font-bold">12</p>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="bg-cognihash-card border-white/20 p-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-cognihash-secondary/20 rounded-lg flex items-center justify-center">
-                <DollarSign className="w-5 h-5 text-cognihash-secondary" />
-              </div>
-              <div>
-                <p className="text-white/70 text-sm">TVL Tracked</p>
-                <p className="text-white text-2xl font-bold">$2.4B</p>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="bg-cognihash-card border-white/20 p-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-cognihash-secondary/20 rounded-lg flex items-center justify-center">
-                <Users className="w-5 h-5 text-cognihash-secondary" />
-              </div>
-              <div>
-                <p className="text-white/70 text-sm">Beta Users</p>
-                <p className="text-white text-2xl font-bold">1.2K</p>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Recent Activity */}
-        <Card className="bg-cognihash-card border-white/20 p-6">
-          <h3 className="text-xl font-bold text-white mb-4">Recent Activity</h3>
-          <div className="space-y-4">
-            {[
-              { query: "What are the top DeFi protocols by TVL?", time: "2 minutes ago", status: "completed" },
-              { query: "Show me recent whale transactions on Solana", time: "5 minutes ago", status: "completed" },
-              { query: "Analyze NFT floor price trends", time: "8 minutes ago", status: "completed" }
-            ].map((activity, index) => (
-              <div key={index} className="flex items-center justify-between p-4 border border-white/10 rounded-lg">
-                <div>
-                  <p className="text-white font-medium">"{activity.query}"</p>
-                  <p className="text-white/50 text-sm">{activity.time}</p>
+            {/* Main Input Container */}
+            <Card className="w-full bg-gray-100 border-0 p-4">
+              <div className="space-y-4">
+                {/* Input Label */}
+                <label className="text-black text-sm font-medium">
+                  What can I do for you?
+                </label>
+                
+                {/* Input Area */}
+                <div className="relative">
+                  <textarea
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Ask me anything about blockchain data..."
+                    className="w-full h-20 bg-transparent border-0 resize-none text-black placeholder-gray-500 focus:outline-none"
+                  />
+                  
+                  {/* Send Button */}
+                  <Button
+                    onClick={handleSend}
+                    className="absolute bottom-2 right-2 bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg text-white"
+                  >
+                    Send
+                  </Button>
                 </div>
-                <span className="text-cognihash-secondary text-sm font-medium">
-                  {activity.status}
-                </span>
+                
+                {/* Bottom Controls */}
+                <div className="flex justify-between items-center">
+                  {/* Agent Selector */}
+                  <div className="flex items-center gap-4">
+                    <Card className="bg-white shadow-sm px-6 py-3 flex items-center gap-2 cursor-pointer hover:shadow-md transition-shadow">
+                      <span className="text-black text-sm">Choose your agent</span>
+                      <ChevronDown className="w-4 h-4 text-black transform -rotate-90" />
+                      <Badge variant="outline" className="text-xs">Agent</Badge>
+                    </Card>
+                  </div>
+                  
+                  {/* Upload Button */}
+                  <Card className="bg-white shadow-sm px-6 py-3 flex items-center gap-2 cursor-pointer hover:shadow-md transition-shadow">
+                    <Plus className="w-4 h-4 text-black" />
+                    <span className="text-black text-sm">Upload PDF or Image</span>
+                  </Card>
+                </div>
               </div>
-            ))}
-          </div>
-        </Card>
+            </Card>
 
-        {/* Back to Home */}
-        <div className="mt-8 text-center">
-          <Link 
-            to="/" 
-            className="text-cognihash-secondary hover:text-cognihash-tertiary transition-colors"
-          >
-            ← Back to Homepage
-          </Link>
-        </div>
+            {/* Welcome Message */}
+            <div className="text-center space-y-2">
+              <h2 className="text-xl font-semibold text-gray-900">
+                Welcome back! 👋
+              </h2>
+              <p className="text-gray-600">
+                Connected wallet: {publicKey?.toString().slice(0, 8)}...{publicKey?.toString().slice(-8)}
+              </p>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
   );
