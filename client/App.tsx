@@ -57,6 +57,7 @@ import { WalletContextProvider } from "./context/WalletProvider";
 import Index from "./pages/Index";
 import Beta from "./pages/Beta";
 import Dashboard from "./pages/Dashboard";
+import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
