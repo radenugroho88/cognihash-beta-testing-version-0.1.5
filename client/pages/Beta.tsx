@@ -149,12 +149,12 @@ export default function Beta() {
                 disabled={isConnecting}
                 className="w-[360px] h-14 rounded-lg border border-[#E5E5E5] bg-white backdrop-blur-[17.5px] relative flex items-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               >
-                <img 
+                <img
                   src={wallet.icon}
                   alt={`${wallet.name} Logo`}
-                  className="w-8 h-8 absolute left-6 top-3"
+                  className="w-8 h-8 absolute left-6 top-3 flex justify-center items-center flex-shrink-0"
                 />
-                <span className="text-black font-lexend text-base font-semibold absolute left-[79px] top-5">
+                <span className="text-black font-lexend text-base font-semibold absolute left-[79px] top-5 leading-4">
                   {wallet.name}
                   {isConnecting && selectedWallet === wallet.name && (
                     <span className="ml-2 text-sm text-gray-500">Connecting...</span>
