@@ -1,13 +1,36 @@
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../components/ui/button";
-import { Header } from "../components/Header";
+import { useNavigate } from "react-router-dom";
+import { ChevronRight, Sun } from "lucide-react";
+
+interface WalletOption {
+  name: string;
+  icon: string;
+  adapter: string;
+}
+
+const walletOptions: WalletOption[] = [
+  {
+    name: "Phantom",
+    icon: "https://api.builder.io/api/v1/image/assets/TEMP/30159e00472bc78f2b4a10f3c8ce102c3c02f451?width=64",
+    adapter: "phantom"
+  },
+  {
+    name: "Solflare", 
+    icon: "https://api.builder.io/api/v1/image/assets/TEMP/0304b847cedfc0779c0593642c633d97466d8ed8?width=64",
+    adapter: "solflare"
+  },
+  {
+    name: "Backpack",
+    icon: "https://api.builder.io/api/v1/image/assets/TEMP/e1744516693676bdbf121eb50b66038e7f51be58?width=64", 
+    adapter: "backpack"
+  }
+];
 
 export default function Beta() {
-  const { connected, publicKey, signMessage } = useWallet();
-  const [isVerifying, setIsVerifying] = useState(false);
+  const { connect, wallets, connected, publicKey, signMessage } = useWallet();
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [selectedWallet, setSelectedWallet] = useState<string | null>(null);
   const [hasAccess, setHasAccess] = useState(false);
   const navigate = useNavigate();
 
@@ -19,10 +42,33 @@ export default function Beta() {
     }
   }, [connected]);
 
+  const handleWalletConnect = async (walletName: string) => {
+    setIsConnecting(true);
+    setSelectedWallet(walletName);
+    
+    try {
+      const wallet = wallets.find(w => 
+        w.adapter.name.toLowerCase().includes(walletName.toLowerCase())
+      );
+      
+      if (wallet) {
+        await connect(wallet.adapter);
+        
+        // If connected, automatically sign message for verification
+        if (publicKey && signMessage) {
+          await handleSignMessage();
+        }
+      }
+    } catch (error) {
+      console.error(`Error connecting to ${walletName}:`, error);
+    } finally {
+      setIsConnecting(false);
+      setSelectedWallet(null);
+    }
+  };
+
   const handleSignMessage = async () => {
     if (!connected || !publicKey || !signMessage) return;
-    
-    setIsVerifying(true);
     
     try {
       const message = `Welcome to CogniHash Beta!\n\nSign this message to verify your wallet ownership and gain access to the dashboard.\n\nWallet: ${publicKey.toString()}\nTimestamp: ${new Date().getTime()}`;
@@ -30,161 +76,118 @@ export default function Beta() {
       
       await signMessage(encodedMessage);
       
-      // Store verification in localStorage (in production, you'd verify this server-side)
+      // Store verification in localStorage
       localStorage.setItem("cognihash_verified", "true");
       localStorage.setItem("cognihash_wallet", publicKey.toString());
       
       setHasAccess(true);
+      
+      // Navigate to dashboard after a brief delay
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1500);
     } catch (error) {
       console.error("Error signing message:", error);
-    } finally {
-      setIsVerifying(false);
     }
   };
 
-  const handleAccessDashboard = () => {
-    navigate("/dashboard");
-  };
+  if (hasAccess) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 mx-auto bg-cognihash-secondary rounded-full flex items-center justify-center animate-pulse">
+            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-lexend font-bold text-black">
+            Welcome to CogniHash! 🎉
+          </h2>
+          <p className="text-gray-600 font-lexend">
+            Redirecting to dashboard...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="bg-cognihash-dark min-h-screen">
-      <Header />
-      
-      <div className="pt-32 pb-20">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center space-y-8">
-            {/* Header */}
-            <div className="space-y-4">
-              <h1 className="text-5xl lg:text-7xl font-bold text-white">
-                Join the <span className="gradient-text">CogniHash Beta</span>
+    <div className="min-h-screen bg-white">
+      {/* Header Bar */}
+      <header className="w-full h-16 px-5 py-2 flex justify-end items-center backdrop-blur-[17.5px]">
+        <div className="flex px-2 justify-end items-center gap-[15px]">
+          <Sun className="w-6 h-6 text-black" />
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
+        <div className="w-[424px] bg-white rounded-xl shadow-[0px_4px_50px_0px_rgba(0,0,0,0.10)] p-6 flex flex-col items-center gap-4">
+          {/* Logo Section */}
+          <div className="w-[280px] p-4 border border-[#E5E5E5] rounded bg-white/25 backdrop-blur-[17.5px] flex items-center justify-center gap-2">
+            <img 
+              src="https://api.builder.io/api/v1/image/assets/TEMP/d3ad95dc35cd88644ec4e7e228b7c5efdd8aa022?width=48"
+              alt="CogniHash Logo"
+              className="w-6 h-[30px] flex-shrink-0"
+            />
+            <div className="flex flex-col justify-center items-start">
+              <h1 className="text-black font-lexend text-[22px] font-bold leading-normal tracking-[-0.66px]">
+                CogniHash
               </h1>
-              <p className="text-xl lg:text-2xl text-white/80 max-w-3xl mx-auto">
-                Connect your Solana wallet to access the future of blockchain intelligence.
-                Get early access to AI-powered crypto insights.
+              <p className="text-black/50 font-lexend text-[12.5px] font-semibold leading-[13px]">
+                Real Time Crypto Intelligence
               </p>
             </div>
+          </div>
 
-            {/* Wallet Connection Section */}
-            <div className="max-w-2xl mx-auto">
-              <div className="border border-white rounded-3xl bg-cognihash-card p-8 lg:p-12">
-                {!connected && (
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      <h2 className="text-2xl lg:text-3xl font-bold text-white">
-                        Connect Your Wallet
-                      </h2>
-                      <p className="text-lg text-white/70">
-                        Connect your Solana wallet to get started with CogniHash Beta
-                      </p>
-                    </div>
-                    
-                    <div className="flex justify-center">
-                      <WalletMultiButton className="!bg-cognihash-primary hover:!bg-cognihash-secondary !rounded-lg !px-8 !py-4 !text-lg !font-medium transition-all duration-300 hover:scale-105" />
-                    </div>
-                  </div>
-                )}
-
-                {connected && !hasAccess && (
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      <div className="w-16 h-16 mx-auto bg-cognihash-secondary rounded-full flex items-center justify-center">
-                        <svg className="w-8 h-8 text-cognihash-dark" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      
-                      <h2 className="text-2xl lg:text-3xl font-bold text-white">
-                        Wallet Connected!
-                      </h2>
-                      <p className="text-lg text-white/70">
-                        Wallet: {publicKey?.toString().slice(0, 8)}...{publicKey?.toString().slice(-8)}
-                      </p>
-                      <p className="text-lg text-white/70">
-                        Sign a message to verify ownership and gain access to the dashboard
-                      </p>
-                    </div>
-                    
-                    <div className="flex justify-center">
-                      <Button 
-                        onClick={handleSignMessage}
-                        disabled={isVerifying}
-                        className="cognihash-button text-white px-8 py-4 text-lg font-medium rounded-lg hover:scale-105 transition-transform"
-                      >
-                        {isVerifying ? "Verifying..." : "Sign Message & Access Beta"}
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {connected && hasAccess && (
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      <div className="w-16 h-16 mx-auto bg-cognihash-secondary rounded-full flex items-center justify-center animate-pulse">
-                        <svg className="w-8 h-8 text-cognihash-dark" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      
-                      <h2 className="text-2xl lg:text-3xl font-bold text-white">
-                        Welcome to CogniHash Beta! 🎉
-                      </h2>
-                      <p className="text-lg text-white/70">
-                        Your wallet has been verified. You now have access to the dashboard.
-                      </p>
-                    </div>
-                    
-                    <div className="flex justify-center">
-                      <Button 
-                        onClick={handleAccessDashboard}
-                        className="cognihash-button text-white px-8 py-4 text-lg font-medium rounded-lg hover:scale-105 transition-transform animate-glow"
-                      >
-                        Access Dashboard →
-                      </Button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Features Preview */}
-            <div className="grid md:grid-cols-3 gap-6 mt-16">
-              <div className="border border-white/20 rounded-2xl bg-cognihash-card/50 p-6">
-                <div className="text-cognihash-secondary text-2xl font-bold mb-2">
-                  AI-Powered Analysis
-                </div>
-                <p className="text-white/70">
-                  Get instant insights from complex blockchain data with natural language queries
-                </p>
-              </div>
-              
-              <div className="border border-white/20 rounded-2xl bg-cognihash-card/50 p-6">
-                <div className="text-cognihash-secondary text-2xl font-bold mb-2">
-                  Real-Time Data
-                </div>
-                <p className="text-white/70">
-                  Access live blockchain data across multiple networks and protocols
-                </p>
-              </div>
-              
-              <div className="border border-white/20 rounded-2xl bg-cognihash-card/50 p-6">
-                <div className="text-cognihash-secondary text-2xl font-bold mb-2">
-                  No-Code Interface
-                </div>
-                <p className="text-white/70">
-                  Simple, intuitive dashboard that requires no technical expertise
-                </p>
-              </div>
-            </div>
-
-            {/* Back to Home */}
-            <div className="pt-8">
-              <Link 
-                to="/" 
-                className="text-cognihash-secondary hover:text-cognihash-tertiary transition-colors text-lg"
+          {/* Wallet Options */}
+          <div className="w-full px-2 py-3 flex flex-col items-center gap-4 backdrop-blur-[17.5px]">
+            {walletOptions.map((wallet) => (
+              <button
+                key={wallet.name}
+                onClick={() => handleWalletConnect(wallet.name)}
+                disabled={isConnecting}
+                className="w-[360px] h-14 rounded-lg border border-[#E5E5E5] bg-white backdrop-blur-[17.5px] relative flex items-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               >
-                ← Back to Homepage
-              </Link>
+                <img 
+                  src={wallet.icon}
+                  alt={`${wallet.name} Logo`}
+                  className="w-8 h-8 absolute left-6 top-3"
+                />
+                <span className="text-black font-lexend text-base font-semibold absolute left-[79px] top-5">
+                  {wallet.name}
+                  {isConnecting && selectedWallet === wallet.name && (
+                    <span className="ml-2 text-sm text-gray-500">Connecting...</span>
+                  )}
+                </span>
+                <ChevronRight className="w-6 h-6 text-[#717A8C] absolute right-6 top-4 transform rotate-0" />
+              </button>
+            ))}
+          </div>
+
+          {/* Connection Status */}
+          {connected && (
+            <div className="w-full text-center space-y-3 mt-4">
+              <div className="text-sm text-gray-600 font-lexend">
+                Connected: {publicKey?.toString().slice(0, 8)}...{publicKey?.toString().slice(-8)}
+              </div>
+              <button
+                onClick={handleSignMessage}
+                className="w-full px-6 py-3 bg-cognihash-primary text-white rounded-lg font-lexend font-semibold hover:bg-cognihash-secondary transition-colors"
+              >
+                Sign Message & Access Dashboard
+              </button>
             </div>
+          )}
+
+          {/* Back to Home */}
+          <div className="mt-6">
+            <button
+              onClick={() => navigate("/")}
+              className="text-cognihash-primary hover:text-cognihash-secondary transition-colors font-lexend text-sm"
+            >
+              ← Back to Homepage
+            </button>
           </div>
         </div>
       </div>
