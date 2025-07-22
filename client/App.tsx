@@ -23,14 +23,28 @@ window.addEventListener('unhandledrejection', (event) => {
 
 // Override console.error temporarily for wallet extension errors
 const originalConsoleError = console.error;
+const originalConsoleWarn = console.warn;
+
 console.error = (...args) => {
   const errorStr = args.join(' ');
   if (errorStr.includes('register') ||
       errorStr.includes('chrome-extension://') ||
-      errorStr.includes('Cannot destructure property')) {
+      errorStr.includes('moz-extension://') ||
+      errorStr.includes('Cannot destructure property') ||
+      errorStr.includes('extension://') ||
+      errorStr.toLowerCase().includes('wallet')) {
     return; // Suppress these specific errors
   }
   originalConsoleError.apply(console, args);
+};
+
+console.warn = (...args) => {
+  const warnStr = args.join(' ');
+  if (warnStr.includes('Encountered two children with the same key') &&
+      warnStr.includes('MetaMask')) {
+    return; // Suppress duplicate key warnings for MetaMask
+  }
+  originalConsoleWarn.apply(console, args);
 };
 
 import { Toaster } from "@/components/ui/toaster";
