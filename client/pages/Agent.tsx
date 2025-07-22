@@ -5,6 +5,7 @@ import { Bell, Sun, ChevronDown } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import Sidebar from "../components/Sidebar";
+import MobileMenuTrigger from "../components/MobileMenuTrigger";
 
 export default function Agent() {
   const { connected, publicKey } = useWallet();
@@ -60,10 +61,15 @@ export default function Agent() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header Bar */}
-      <header className="w-full h-16 px-5 py-2 flex justify-end items-center backdrop-blur-[17.5px] border-b border-gray-100">
-        <div className="flex px-2 justify-end items-center gap-4">
+    <div className="min-h-screen bg-white flex">
+      <Sidebar />
+
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Header Bar */}
+        <header className="w-full h-16 px-4 py-2 flex justify-between items-center backdrop-blur-[17.5px] border-b border-gray-100 bg-white/80">
+          <MobileMenuTrigger />
+
+          <div className="flex px-2 justify-end items-center gap-4">
           <div className="relative">
             <Bell className="w-6 h-6 text-black" />
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
@@ -90,16 +96,13 @@ export default function Agent() {
           
           <Sun className="w-6 h-6 text-black" />
           
-          <div className="w-12 h-12 rounded-full border border-gray-200 bg-gray-100 flex items-center justify-center">
-            <span className="text-xs">👤</span>
+            <div className="w-12 h-12 rounded-full border border-gray-200 bg-gray-100 flex items-center justify-center">
+              <span className="text-xs">👤</span>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <div className="flex">
-        <Sidebar />
-
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-4 md:p-8 overflow-auto">
           <div className="max-w-6xl mx-auto space-y-8">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold text-gray-900">Agent Onchain</h1>
