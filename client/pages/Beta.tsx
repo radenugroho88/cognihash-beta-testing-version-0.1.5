@@ -124,8 +124,8 @@ export default function Beta() {
       <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
         <div className="w-[424px] bg-white rounded-xl shadow-[0px_4px_50px_0px_rgba(0,0,0,0.10)] p-6 flex flex-col items-center gap-4">
           {/* Logo Section */}
-          <div className="w-[280px] p-4 border border-[#E5E5E5] rounded bg-white/25 backdrop-blur-[17.5px] flex items-center justify-center gap-2">
-            <img 
+          <div className="w-[280px] px-5 py-4 border border-[#E5E5E5] rounded bg-white/25 backdrop-blur-[17.5px] flex items-center justify-center gap-2">
+            <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/d3ad95dc35cd88644ec4e7e228b7c5efdd8aa022?width=48"
               alt="CogniHash Logo"
               className="w-6 h-[30px] flex-shrink-0"
