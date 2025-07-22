@@ -158,21 +158,7 @@ export default function Beta() {
 
           {/* Main Card */}
           <Card className="max-w-2xl mx-auto bg-cognihash-card border-white/20 shadow-2xl">
-            <CardHeader className="text-center space-y-4">
-              {/* Logo */}
-              <div className="flex items-center justify-center gap-3 p-4 border border-white/10 rounded-lg bg-white/5 backdrop-blur-sm">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets%2F1bea0cc41c084038a6a915a367aa70f5%2F5308d7802ddd4353a106d0a44121efa6?format=webp&width=800"
-                  alt="CogniHash Logo"
-                  className="w-8 h-10"
-                />
-                <div className="text-left">
-                  <CardTitle className="text-white text-xl font-jakarta">CogniHash</CardTitle>
-                  <CardDescription className="text-white/60 text-sm">
-                    Real Time Crypto Intelligence
-                  </CardDescription>
-                </div>
-              </div>
+            <CardHeader className="text-center space-y-4 pb-0">
             </CardHeader>
 
             <CardContent className="space-y-6">
