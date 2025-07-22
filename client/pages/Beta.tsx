@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight, Wallet, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "../components/ui/button";
