@@ -6,9 +6,12 @@ import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import Sidebar from "../components/Sidebar";
+import MobileMenuTrigger from "../components/MobileMenuTrigger";
+import { useSidebar } from "../context/SidebarContext";
 
 export default function Dashboard() {
   const { connected, publicKey } = useWallet();
+  const { isCollapsed, isMobile } = useSidebar();
   const [hasAccess, setHasAccess] = useState(false);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
@@ -77,10 +80,15 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header Bar */}
-      <header className="w-full h-16 px-5 py-2 flex justify-end items-center backdrop-blur-[17.5px] border-b border-gray-100">
-        <div className="flex px-2 justify-end items-center gap-4">
+    <div className="min-h-screen bg-white flex">
+      <Sidebar />
+
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Header Bar */}
+        <header className="w-full h-16 px-4 py-2 flex justify-between items-center backdrop-blur-[17.5px] border-b border-gray-100 bg-white/80">
+          <MobileMenuTrigger />
+
+          <div className="flex px-2 justify-end items-center gap-4">
           {/* Notifications */}
           <div className="relative">
             <Bell className="w-6 h-6 text-black" />
@@ -112,18 +120,14 @@ export default function Dashboard() {
           <Sun className="w-6 h-6 text-black" />
           
           {/* Profile Image */}
-          <div className="w-12 h-12 rounded-full border border-gray-200 bg-gray-100 flex items-center justify-center">
-            <span className="text-xs">👤</span>
+            <div className="w-12 h-12 rounded-full border border-gray-200 bg-gray-100 flex items-center justify-center">
+              <span className="text-xs">👤</span>
+            </div>
           </div>
-        </div>
-      </header>
-
-      <div className="flex">
-        {/* Sidebar */}
-        <Sidebar />
+        </header>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col items-center justify-center px-8">
+        <main className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 overflow-auto">
           <div className="w-full max-w-4xl space-y-8">
             {/* Logo and Title */}
             <div className="flex items-center justify-center gap-4">
