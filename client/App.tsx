@@ -1,5 +1,15 @@
 import "./global.css";
 
+// Suppress wallet extension errors
+window.addEventListener('error', (event) => {
+  if (event.error?.message?.includes('register') ||
+      event.message?.includes('register') ||
+      event.filename?.includes('chrome-extension://')) {
+    event.preventDefault();
+    return false;
+  }
+});
+
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
