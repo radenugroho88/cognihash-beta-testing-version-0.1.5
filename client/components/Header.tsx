@@ -6,7 +6,7 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 px-4 lg:px-8 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <img
             src="https://api.builder.io/api/v1/image/assets/TEMP/6aa47291b1deceac179cead818ec277edb612266?width=112"
             alt="CogniHash Logo"
@@ -15,7 +15,7 @@ export function Header() {
           <h1 className="text-white font-jakarta font-bold text-2xl lg:text-3xl">
             CogniHash
           </h1>
-        </div>
+        </Link>
 
         {/* Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
