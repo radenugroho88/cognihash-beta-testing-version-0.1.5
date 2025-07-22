@@ -21,8 +21,8 @@ export default function Dashboard() {
     if (verified === "true" && connected && publicKey && storedWallet === publicKey.toString()) {
       setHasAccess(true);
     } else {
-      // For demo purposes - in production, this would redirect to beta page
-      setHasAccess(true);
+      // Redirect to beta page if not verified
+      setHasAccess(false);
     }
     setLoading(false);
   }, [connected, publicKey]);
