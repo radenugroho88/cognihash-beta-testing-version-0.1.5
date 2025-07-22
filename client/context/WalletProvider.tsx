@@ -22,17 +22,29 @@ export function WalletContextProvider({ children }: WalletContextProviderProps) 
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
     const wallets = useMemo(
-        () => [
-            new PhantomWalletAdapter(),
-            // Add other wallet adapters here if needed
-        ],
+        () => {
+            try {
+                return [
+                    new PhantomWalletAdapter(),
+                    // Add other wallet adapters here if needed
+                ];
+            } catch (error) {
+                console.log('Wallet adapter initialization:', error);
+                return [];
+            }
+        },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [network]
     );
 
+    const onError = (error: any) => {
+        console.log('Wallet error:', error);
+        // Silently handle wallet errors to prevent console spam
+    };
+
     return (
         <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
+            <WalletProvider wallets={wallets} autoConnect onError={onError}>
                 <WalletModalProvider>
                     {children}
                 </WalletModalProvider>
