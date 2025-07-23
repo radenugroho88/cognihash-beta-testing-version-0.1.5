@@ -104,7 +104,7 @@ export default function Sidebar() {
             title="Expand sidebar"
           >
             <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/d3accaac5015101aa5c50b3f516fc2fa922defa3?width=105"
+              src="https://cdn.builder.io/api/v1/image/assets%2F1bea0cc41c084038a6a915a367aa70f5%2F2c92c55e4c19489eabcf3ba270e3f717?format=webp&width=800"
               alt="CogniHash Logo"
               className="w-[53px] h-[53px] rounded-lg"
             />
