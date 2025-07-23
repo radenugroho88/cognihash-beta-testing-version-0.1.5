@@ -48,11 +48,6 @@ export function DataClarity() {
 
             {/* Right Image */}
             <div className="flex justify-center">
-              <img
-                src="https://api.builder.io/api/v1/image/assets/TEMP/638c2a9ee56a1877ed6120a92cdbf288023275bd?width=1126"
-                alt="Fragmented Data Visualization"
-                className="w-full max-w-lg rounded-3xl"
-              />
             </div>
           </div>
         </div>
