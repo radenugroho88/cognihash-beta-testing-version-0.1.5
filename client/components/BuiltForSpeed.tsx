@@ -14,8 +14,7 @@ export function BuiltForSpeed() {
         </div>
 
         {/* Central Visualization */}
-        <div className="flex justify-center mb-16">
-        </div>
+        <div className="flex justify-center mb-16"></div>
 
         {/* Feature Cards */}
         <div className="grid md:grid-cols-3 gap-8">

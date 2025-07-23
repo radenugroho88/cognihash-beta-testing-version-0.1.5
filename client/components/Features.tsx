@@ -18,42 +18,48 @@ export function Features() {
 
     const section = sectionRef.current;
     if (section) {
-      section.addEventListener('mousemove', handleMouseMove);
-      return () => section.removeEventListener('mousemove', handleMouseMove);
+      section.addEventListener("mousemove", handleMouseMove);
+      return () => section.removeEventListener("mousemove", handleMouseMove);
     }
   }, []);
 
   const featureCards = [
     {
       title: "You Ask",
-      description: "Get real answers instantly. Just type your question—no SQL, no dashboards, no devs needed.",
+      description:
+        "Get real answers instantly. Just type your question—no SQL, no dashboards, no devs needed.",
       gradient: "from-cognihash-primary/20 to-cognihash-secondary/20",
-      icon: "💬"
+      icon: "💬",
     },
     {
       title: "We Orchestrate",
-      description: "Our AI-native engine automates data indexing, cross-chain search, and agentic reasoning in seconds.",
+      description:
+        "Our AI-native engine automates data indexing, cross-chain search, and agentic reasoning in seconds.",
       gradient: "from-cognihash-secondary/20 to-cognihash-tertiary/20",
-      icon: "⚡"
+      icon: "⚡",
     },
     {
       title: "You Get Answers",
-      description: "Actionable insights delivered quickly for compliance, trading, tracing, or building DeFi.",
+      description:
+        "Actionable insights delivered quickly for compliance, trading, tracing, or building DeFi.",
       gradient: "from-cognihash-tertiary/20 to-cognihash-primary/20",
-      icon: "🎯"
-    }
+      icon: "🎯",
+    },
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 lg:py-32 relative overflow-hidden cursor-crosshair">
+    <section
+      ref={sectionRef}
+      className="py-20 lg:py-32 relative overflow-hidden cursor-crosshair"
+    >
       {/* Dynamic Background Effect */}
-      <div 
+      <div
         className="absolute inset-0 opacity-10 transition-all duration-500 ease-out pointer-events-none"
         style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 180, 159, 0.15), transparent 40%)`
+          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 180, 159, 0.15), transparent 40%)`,
         }}
       />
-      
+
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16 space-y-4">
@@ -90,29 +96,29 @@ export function Features() {
         {/* Feature Cards */}
         <div className="grid md:grid-cols-3 gap-8">
           {featureCards.map((card, index) => (
-            <div 
+            <div
               key={index}
               className="relative group"
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Card Background Glow */}
-              <div 
+              <div
                 className={`absolute -inset-1 bg-gradient-to-r ${card.gradient} rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500 animate-tilt`}
               />
-              
+
               {/* Main Card */}
               <div className="relative border border-white rounded-2xl bg-cognihash-dark p-8 h-48 hover:bg-cognihash-card hover:border-cognihash-secondary transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cognihash-primary/20 cursor-pointer overflow-hidden group">
                 {/* Animated Background Pattern */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
                   <div className="absolute inset-0 bg-gradient-to-br from-cognihash-primary/5 via-transparent to-cognihash-secondary/5 animate-gradient-shift"></div>
                 </div>
-                
+
                 {/* Floating Icon */}
                 <div className="absolute top-4 right-4 text-2xl opacity-50 group-hover:opacity-100 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
                   {card.icon}
                 </div>
-                
+
                 {/* Content */}
                 <div className="relative text-center space-y-4">
                   <h3 className="text-cognihash-secondary text-2xl lg:text-3xl font-bold group-hover:text-cognihash-tertiary transition-colors duration-300">
@@ -122,7 +128,7 @@ export function Features() {
                     {card.description}
                   </p>
                 </div>
-                
+
                 {/* Interactive Border Animation */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="absolute inset-0 rounded-2xl border-2 border-cognihash-primary animate-pulse-border"></div>
@@ -143,12 +149,12 @@ export function Features() {
         </div>
 
         {/* Interactive Cursor Follower */}
-        <div 
+        <div
           className="fixed w-4 h-4 pointer-events-none z-50 mix-blend-difference"
           style={{
             left: mousePosition.x - 8,
             top: mousePosition.y - 8,
-            transition: 'all 0.1s ease-out'
+            transition: "all 0.1s ease-out",
           }}
         >
           <div className="w-full h-full bg-white rounded-full animate-pulse"></div>

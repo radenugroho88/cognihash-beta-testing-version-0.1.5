@@ -61,8 +61,6 @@ export function CallToAction() {
             </h4>
           </div>
         </div>
-
-
       </div>
     </section>
   );
