@@ -5,19 +5,19 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
       {/* Background Wave Grid */}
-      <div className="absolute inset-0 wave-grid">
+      <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-[234px] opacity-50">
           <img
             src="https://api.builder.io/api/v1/image/assets/TEMP/ac9e6225e937dffab147aa936eba1ed8c7458741?width=3840"
             alt="Wave Grid Top"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover border-0"
           />
         </div>
         <div className="absolute bottom-0 left-0 w-full h-[234px] opacity-50">
           <img
             src="https://api.builder.io/api/v1/image/assets/TEMP/5e3bb49b68c0388624f60ce204d9d3c227c469b6?width=3840"
             alt="Wave Grid Bottom"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover border-0"
           />
         </div>
       </div>
