@@ -62,24 +62,7 @@ export function CallToAction() {
           </div>
         </div>
 
-        {/* Demo Images */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="border border-white rounded-3xl overflow-hidden">
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/d80490ce4d2b404c231ead52517261c8f77531be?width=1346"
-              alt="CogniHash Interface Demo"
-              className="w-full h-full object-cover"
-            />
-          </div>
 
-          <div className="border border-white rounded-3xl overflow-hidden">
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/27880eae650ced34709b275292b4ca4107ca04b4?width=2302"
-              alt="CogniHash Mobile Demo"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
       </div>
     </section>
   );
