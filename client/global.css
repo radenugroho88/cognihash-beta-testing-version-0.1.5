@@ -324,4 +324,150 @@
   .interactive-glow:hover::before {
     left: 100%;
   }
+
+  /* DataClarity Component Animations */
+  .animate-orbit {
+    animation: orbit 8s linear infinite;
+  }
+
+  .animate-data-pulse {
+    animation: dataPulse 2s ease-in-out infinite;
+  }
+
+  .animate-progress-fill {
+    animation: progressFill 1.5s ease-out;
+  }
+
+  .animate-metric-count {
+    animation: metricCount 2s ease-out;
+  }
+
+  @keyframes orbit {
+    0% {
+      transform: rotate(0deg) translateX(50px) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translateX(50px) rotate(-360deg);
+    }
+  }
+
+  @keyframes dataPulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes progressFill {
+    0% {
+      width: 0%;
+      opacity: 0;
+    }
+    100% {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  @keyframes metricCount {
+    0% {
+      transform: scale(0.5) rotate(-180deg);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.2) rotate(0deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+  }
+
+  /* Glassmorphism Effects */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(0, 180, 159, 0.3);
+  }
+
+  /* Web3 Data Visualization */
+  .data-node {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .data-node::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(0, 180, 159, 0.3), transparent);
+    animation: spin 4s linear infinite;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+
+  .data-node::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: rgba(14, 21, 26, 0.9);
+    border-radius: inherit;
+    z-index: 1;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  /* Metric Counter Animation */
+  .metric-counter {
+    background: linear-gradient(135deg, rgba(0, 180, 159, 0.1), rgba(20, 241, 178, 0.1));
+    border: 1px solid rgba(0, 180, 159, 0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Connection Lines */
+  .connection-line {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .connection-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 180, 159, 0.6), transparent);
+    animation: connectionPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes connectionPulse {
+    0%, 100% {
+      left: -100%;
+    }
+    50% {
+      left: 100%;
+    }
+  }
 }
